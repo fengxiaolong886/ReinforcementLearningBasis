@@ -80,191 +80,332 @@
 
 * BipedalWalker-v2
 
-  Reward is given for moving forward, total 300+ points up to the far end. If the robot falls, it gets -100. Applying motor torque costs a small amount of points, more optimal agent will get better score. State consists of hull angle speed, angular velocity, horizontal speed, vertical speed, position of joints and joints angular speed, legs contact with ground, and 10 lidar rangefinder measurements. There's no coordinates in the state vector.
+  这个环境要训练机器人向前移动，走到最远的位置一共有奖励300+，如果摔倒奖励-100。
+
+  环境的状态包括了船体角速度，角速度，水平速度，垂直速度，关节位置和关节角速度，腿是否与地面的接触以及10个激光雷达测距仪的测量值。（ hull angle speed, angular velocity, horizontal speed, vertical speed, position of joints and joints angular speed, legs contact with ground, and 10 lidar rangefinder measurements.）状态向量中没有坐标。
+
+  ![BipedalWalker-v2.gif](https://upload-images.jianshu.io/upload_images/15463866-e4f6c0c181c99409.gif?imageMogr2/auto-orient/strip)
 
 * BipedalWalkerHardcore-v2
 
-  Hardcore version with ladders, stumps, pitfalls. Time limit is increased due to obstacles. Reward is given for moving forward, total 300+ points up to the far end. If the robot falls, it gets -100. Applying motor torque costs a small amount of points, more optimal agent will get better score. State consists of hull angle speed, angular velocity, horizontal speed, vertical speed, position of joints and joints angular speed, legs contact with ground, and 10 lidar rangefinder measurements. There's no coordinates in the state vector.
+  与BipedalWalker-v2相比，增加了一些障碍物。
+
+  ![BipedalWalkerHardcore-v2.gif](https://upload-images.jianshu.io/upload_images/15463866-6ef01934adab2eed.gif?imageMogr2/auto-orient/strip)
 
 * CarRacing-v0
 
-  Easiest continuous control task to learn from pixels, a top-down racing environment. Discreet control is reasonable in this environment as well, on/off discretisation is fine. State consists of 96x96 pixels. Reward is -0.1 every frame and +1000/N for every track tile visited, where N is the total number of tiles in track. For example, if you have finished in 732 frames, your reward is 1000 - 0.1*732 = 926.8 points. Episode finishes when all tiles are visited. Some indicators shown at the bottom of the window and the state RGB buffer. From left to right: true speed, four ABS sensors, steering wheel position, gyroscope.
+  CarRacing-v0是一个最简单的连续控制任务。智能体从环境的图片像素中学习。这个环境也可以进行离散动作控制，环境带有离散化的开关控制是否进行离散化的动作控制。状态是由96x96的像素组成。 奖励是每帧-0.1。到达每个预定义位置会有+1000/N的奖励，所以环境里面有N个小目标。
+
+  例如，智能体在732帧完成目标，则奖励为1000-0.1 * 732 = 926.8。 赛车碰到边界就结束。窗口底部会显示一些指标。 从左到右为：真实速度，四个ABS传感器，方向盘位置，陀螺仪。
+
+  ![CarRacing-v0.gif](https://upload-images.jianshu.io/upload_images/15463866-a66315191965bc42.gif?imageMogr2/auto-orient/strip)
 
 * LunarLander-v2
 
-  Landing pad is always at coordinates (0,0). Coordinates are the first two numbers in state vector. Reward for moving from the top of the screen to landing pad and zero speed is about 100..140 points. If lander moves away from landing pad it loses reward back. Episode finishes if the lander crashes or comes to rest, receiving additional -100 or +100 points. Each leg ground contact is +10. Firing main engine is -0.3 points each frame. Solved is 200 points. Landing outside landing pad is possible. Fuel is infinite, so an agent can learn to fly and then land on its first attempt. Four discrete actions available: do nothing, fire left orientation engine, fire main engine, fire right orientation engine.
+  这是一个控制智能体着陆到指定目标的任务。
+
+  >Landing pad is always at coordinates (0,0). Coordinates are the first two numbers in state vector. Reward for moving from the top of the screen to landing pad and zero speed is about 100..140 points. If lander moves away from landing pad it loses reward back. Episode finishes if the lander crashes or comes to rest, receiving additional -100 or +100 points. Each leg ground contact is +10. Firing main engine is -0.3 points each frame. Solved is 200 points. Landing outside landing pad is possible. Fuel is infinite, so an agent can learn to fly and then land on its first attempt. Four discrete actions available: do nothing, fire left orientation engine, fire main engine, fire right orientation engine.
+
+  ![LunarLander-v2.gif](https://upload-images.jianshu.io/upload_images/15463866-ef6713fd452abd3b.gif?imageMogr2/auto-orient/strip)
 
 * LunarLanderContinuous-v2
 
-* Landing pad is always at coordinates (0,0). Coordinates are the first two numbers in state vector. Reward for moving from the top of the screen to landing pad and zero speed is about 100..140 points. If lander moves away from landing pad it loses reward back. Episode finishes if the lander crashes or comes to rest, receiving additional -100 or +100 points. Each leg ground contact is +10. Firing main engine is -0.3 points each frame. Solved is 200 points. Landing outside landing pad is possible. Fuel is infinite, so an agent can learn to fly and then land on its first attempt. Action is two real values vector from -1 to +1. First controls main engine, -1..0 off, 0..+1 throttle from 50% to 100% power. Engine can't work with less than 50% power. Second value -1.0..-0.5 fire left engine, +0.5..+1.0 fire right engine, -0.5..0.5 off.
+  LunarLander-v2的连续控制版本
+  
+  > Landing pad is always at coordinates (0,0). Coordinates are the first two numbers in state vector. Reward for moving from the top of the screen to landing pad and zero speed is about 100..140 points. If lander moves away from landing pad it loses reward back. Episode finishes if the lander crashes or comes to rest, receiving additional -100 or +100 points. Each leg ground contact is +10. Firing main engine is -0.3 points each frame. Solved is 200 points. Landing outside landing pad is possible. Fuel is infinite, so an agent can learn to fly and then land on its first attempt. Action is two real values vector from -1 to +1. First controls main engine, -1..0 off, 0..+1 throttle from 50% to 100% power. Engine can't work with less than 50% power. Second value -1.0..-0.5 fire left engine, +0.5..+1.0 fire right engine, -0.5..0.5 off.
+  
+  ![LunarLanderContinuous-v2.gif](https://upload-images.jianshu.io/upload_images/15463866-652527180e24c1a6.gif?imageMogr2/auto-orient/strip)
 
 ## 4、 MuJoCo环境
 
-* # Ant-v2
+MuJoCo（Multi-Joint dynamics with Contact）是一个物理模拟器，可以用于机器人控制优化等研究。
 
-* Make a four-legged creature walk forward as fast as possible.
+* Ant-v2
 
-* # HalfCheetah-v2
+  需要训练一个四足的智能体学会行走。
 
-* # Hopper-v2
+  ![Ant-v2.gif](https://upload-images.jianshu.io/upload_images/15463866-ff54699708facabb.gif?imageMogr2/auto-orient/strip)
 
-* Make a two-dimensional one-legged robot hop forward as fast as possible.
+* HalfCheetah-v2
 
-* # Humanoid-v2
+  需要训练一个两足的智能体学会行走。
 
-* Make a three-dimensional bipedal robot walk forward as fast as possible, without falling over.
+  ![HalfCheetah-v2.gif](https://upload-images.jianshu.io/upload_images/15463866-7a1da477c8c40245.gif?imageMogr2/auto-orient/strip)
 
-* # HumanoidStandup-v2
+* Hopper-v2
 
-* Make a three-dimensional bipedal robot standup as fast as possible.
+  需要训练一个单腿的智能体向前跳跃
 
-* # InvertedDoublePendulum-v2
+  ![Hopper-v2.gif](https://upload-images.jianshu.io/upload_images/15463866-34ad75c11a8547f0.gif?imageMogr2/auto-orient/strip)
 
-* # InvertedPendulum-v2
+* Humanoid-v2
 
-* # Reacher-v2
+  需要训练三维双足智能体尽可能快地向前走，并且不会摔倒。
 
-* # Swimmer-v2
+  ![Humanoid-v2.gif](https://upload-images.jianshu.io/upload_images/15463866-d7709f5d58760d5d.gif?imageMogr2/auto-orient/strip)
 
-* This task involves a 3-link swimming robot in a viscous fluid, where the goal is to make it swim forward as fast as possible, by actuating the two joints. The origins of task can be traced back to Remi Coulom's thesis [[1\]](http://gym.openai.com/envs/Swimmer-v2/#id2).
+* HumanoidStandup-v2
 
-* # Walker2d-v2
+  需要训练尽可能快地让使三维双足智能体学会站立。
 
-  Make a two-dimensional bipedal robot walk forward as fast as possible.
+  ![HumanoidStandup-v2.gif](https://upload-images.jianshu.io/upload_images/15463866-bc78a624e4b45c4b.gif?imageMogr2/auto-orient/strip)
+
+* InvertedDoublePendulum-v2
+
+  需要智能体学会保持连杆不要掉下来
+
+  ![InvertedDoublePendulum-v2.gif](https://upload-images.jianshu.io/upload_images/15463866-c56f48131ab426bb.gif?imageMogr2/auto-orient/strip)
+
+* InvertedPendulum-v2
+
+  
+
+  ![InvertedPendulum-v2.gif](https://upload-images.jianshu.io/upload_images/15463866-a755a1af35311187.gif?imageMogr2/auto-orient/strip)
+
+* Reacher-v2
+
+  训练智能体不断去接近一个目标。
+
+  ![Reacher-v2.gif](https://upload-images.jianshu.io/upload_images/15463866-1b56fc692b03b686.gif?imageMogr2/auto-orient/strip)
+
+* Swimmer-v2
+
+  此任务涉及在粘性流体中的三连杆游泳智能体，其目的是通过控制两个关节，使其尽可能快地向前游泳。 
+
+  ![Swimmer-v2.gif](https://upload-images.jianshu.io/upload_images/15463866-edd134132bc7c68f.gif?imageMogr2/auto-orient/strip)
+
+* Walker2d-v2
+
+  需要训练使二维双足智能体尽可能快地向前走。
+  
+  ![Walker2d-v2.gif](https://upload-images.jianshu.io/upload_images/15463866-8834b3dbd1be548c.gif?imageMogr2/auto-orient/strip)
 
 ## 5、Atari视频游戏环境
 
-利用强化学习来玩雅达利的游戏。*Gym*中集成了对强化学习有着重要影响的*Arcade Learning Environment*，并且方便用户安装；一共118个
+利用强化学习来玩雅达利的游戏。*Gym*中集成了对强化学习有着重要影响的*Arcade Learning Environment*，并且方便用户安装；
 
-# Boxing-ram-v0
+游戏的目标都是为了在游戏中最大化游戏分数。但是他们的状态分为两类，一类是直接观测屏幕的像素输出，另一类是观测到RAM中的数据。所有的环境名称列在下表中：
 
-Maximize your score in the Atari 2600 game Boxing. In this environment, the observation is the RAM of the Atari machine, consisting of (only!) 128 bytes. Each action is repeatedly performed for a duration of k*k* frames, where k*k* is uniformly sampled from \{2, 3, 4\}
+| 游戏名称         | 环境名称（屏幕输出） | 环境名称（RAM）         |
+| ---------------- | -------------------- | ----------------------- |
+| AirRaid          | AirRaid-v0           | AirRaid-ram-v0          |
+| Alien            | Alien-v0             | Alien-ram-v0            |
+| Amidar           | Amidar-v0            | Amidar-ram-v0           |
+| Assault          | Assault-v0           | Assault-ram-v0          |
+| Asterix          | Asterix-v0           | Asterix-ram-v0          |
+| Asteroids        | Asteroids-v0         | Asteroids-ram-v0        |
+| Atlantis         | Atlantis-v0          | Atlantis-ram-v0         |
+| BankHeist        | BankHeist-v0         | BankHeist-ram-v0        |
+| BattleZone       | BattleZone-v0        | BattleZone-ram-v0       |
+| BeamRider        | BeamRider-v0         | BeamRider-ram-v0        |
+| Berzerk          | Berzerk-v0           | Berzerk-ram-v0          |
+| Bowling          | Bowling-v0           | Bowling-ram-v0          |
+| Boxing           | Boxing-v0            | Boxing-ram-v0           |
+| Breakout         | Breakout-v0          | Breakout-ram-v0         |
+| Carnival         | Carnival-v0          | Carnival-ram-v0         |
+| Centipede        | Centipede-v0         | Centipede-ram-v0        |
+| ChopperCommand   | ChopperCommand-v0    | ChopperCommand-ram-v0   |
+| CrazyClimber     | CrazyClimber-v0      | CrazyClimber-ram-v0     |
+| DemonAttack      | DemonAttack-v0       | DemonAttack-ram-v0      |
+| DoubleDunk       | DoubleDunk-v0        | DoubleDunk-ram-v0       |
+| ElevatorAction   | ElevatorAction-v0    | ElevatorAction-ram-v0   |
+| Enduro           | Enduro-v0            | Enduro-ram-v0           |
+| FishingDerby     | FishingDerby-v0      | FishingDerby-ram-v0     |
+| Freeway          | Freeway-v0           | Freeway-ram-v0          |
+| Frostbite        | Frostbite-v0         | Frostbite-ram-v0        |
+| Gopher           | Gopher-v0            | Gopher-ram-v0           |
+| Gravitar         | Gravitar-v0          | Gravitar-ram-v0         |
+| IceHockey        | IceHockey-v0         | IceHockey-ram-v0        |
+| Jamesbond        | Jamesbond-v0         | Jamesbond-ram-v0        |
+| JourneyEscape    | JourneyEscape-v0     | JourneyEscape-ram-v0    |
+| Kangaroo         | Kangaroo-v0          | Kangaroo-ram-v0         |
+| Krull            | Krull-v0             | Krull-ram-v0            |
+| KungFuMaster     | KungFuMaster-v0      | KungFuMaster-ram-v0     |
+| MontezumaRevenge | MontezumaRevenge-v0  | MontezumaRevenge-ram-v0 |
+| MsPacman         | MsPacman-v0          | MsPacman-ram-v0         |
+| NameThisGame     | NameThisGame-v0      | NameThisGame-ram-v0     |
+| Phoenix          | Phoenix-v0           | Phoenix-ram-v0          |
+| Pitfall          | Pitfall-v0           | Pitfall-ram-v0          |
+| Pong             | Pong-v0              | Pong-ram-v0             |
+| Pooyan           | Pooyan-v0            | Pooyan-ram-v0           |
+| PrivateEye       | PrivateEye-v0        | PrivateEye-ram-v0       |
+| Qbert            | Qbert-v0             | Qbert-ram-v0            |
+| Riverraid        | Riverraid-v0         | Riverraid-ram-v0        |
+| RoadRunner       | RoadRunner-v0        | RoadRunner-ram-v0       |
+| Robotank         | Robotank-v0          | Robotank-ram-v0         |
+| Seaquest         | Seaquest-v0          | Seaquest-ram-v0         |
+| Skiing           | Skiing-v0            | Skiing-ram-v0           |
+| Solaris          | Solaris-v0           | Solaris-ram-v0          |
+| SpaceInvaders    | SpaceInvaders-v0     | SpaceInvaders-ram-v0    |
+| StarGunner       | StarGunner-v0        | StarGunner-ram-v0       |
+| Tennis           | Tennis-v0            | Tennis-ram-v0           |
+| TimePilot        | TimePilot-v0         | TimePilot-ram-v0        |
+| Tutankham        | Tutankham-v0         | Tutankham-ram-v0        |
+| UpNDown          | UpNDown-v0           | UpNDown-ram-v0          |
+| Venture          | Venture-v0           | Venture-ram-v0          |
+| VideoPinball     | VideoPinball-v0      | VideoPinball-ram-v0     |
+| WizardOfWor      | WizardOfWor-v0       | WizardOfWor-ram-v0      |
+| YarsRevenge      | YarsRevenge-v0       | YarsRevenge-ram-v0      |
+| Zaxxon           | Zaxxon-v0            | Zaxxon-ram-v0           |
 
-# Breakout-ram-v0
+下面简单看几个在课程与论文中常常引用到的环境。
 
-Maximize your score in the Atari 2600 game Breakout. In this environment, the observation is the RAM of the Atari machine, consisting of (only!) 128 bytes. Each action is repeatedly performed for a duration of k*k* frames, where k*k* is uniformly sampled from \{2, 3, 4\}{2,3,4}.
+* Boxing-ram-v0
 
-# Enduro-ram-v0
+  Atari 2600的拳击游戏。
 
-Maximize your score in the Atari 2600 game Enduro. In this environment, the observation is the RAM of the Atari machine, consisting of (only!) 128 bytes. Each action is repeatedly performed for a duration of k*k* frames, where k*k* is uniformly sampled from \{2, 3, 4\}{2,3,4}.
+  拳击显示了两个拳击手的俯视图，一个白人和一个黑人。 足够接近时，拳击手可以用拳打他的对手（通过按Atari操纵杆上的开火按钮执行）。 这会使他的对手稍微退缩。 长拳得一分，近拳（强力出拳，手动）得2分。 没有击倒或回合。 当一个玩家进行100次打球（“淘汰赛”）或经过两分钟（“决定”）时，比赛结束。 在作出决定的情况下，拳头落地最多的玩家就是赢家。
 
-# Qbert-ram-v0
+  ![Boxing-ram-v0.gif](https://upload-images.jianshu.io/upload_images/15463866-e27e7346d42761e8.gif?imageMogr2/auto-orient/strip)
 
-Maximize your score in the Atari 2600 game Qbert. In this environment, the observation is the RAM of the Atari machine, consisting of (only!) 128 bytes. Each action is repeatedly performed for a duration of k*k* frames, where k*k* is uniformly sampled from \{2, 3, 4\}{2,3,4}.
+* Breakout-ram-v0
 
-# Seaquest-ram-v0
+  游戏开始时，画面今显示8排砖块，每隔两排，砖块的颜色就不同。由下至上的颜色排序为黄色、绿色、橙色和红色。游戏开始后，玩家必须控制一块平台左右移动以反弹一个球。当那个球碰到砖块时，砖块就会消失，而球就会反弹。当玩家未能用平台反弹球的话，那么玩家就输掉了那个回合。当玩家连续输掉3次后，玩家就会输掉整个游戏。玩家在游戏中的目的就是清除所有砖块。玩家破坏黄色砖块能得1分、绿色能得3分、橙色能得5分、而红色则能得7分。当球碰到画面顶部时，玩家所控制的平台长度就会减半。另外，球的移动速度会在接触砖块4次、接触砖块12次、接触橙色砖块和接触红色砖块后加速。玩家在此游戏中最高能获896分，即完成两个448分的关卡。当玩家获得896分后，游戏不会自动结束，只会待玩家输掉3次后才会结束。
 
-Maximize your score in the Atari 2600 game Seaquest. In this environment, the observation is the RAM of the Atari machine, consisting of (only!) 128 bytes. Each action is repeatedly performed for a duration of k*k* frames, where k*k* is uniformly sampled from \{2, 3, 4\}{2,3,4}.
+  ![Breakout-ram-v0.gif](https://upload-images.jianshu.io/upload_images/15463866-b92a62f82db51596.gif?imageMogr2/auto-orient/strip)
 
+* Enduro-ram-v0
 
+  Enduro包括在长途耐力赛National Enduro中操纵一辆赛车。 比赛的目的是每天通过一定数量的汽车。 这样做将允许玩家在第二天继续比赛。 驾驶员必须避开其他赛车手，第一天要通过200辆汽车，第二天每天要通过300辆汽车。
 
-# SpaceInvaders-ram-v0
+  ![Enduro-ram-v0.gif](https://upload-images.jianshu.io/upload_images/15463866-cf009ac80dca9267.gif?imageMogr2/auto-orient/strip)
 
-Maximize your score in the Atari 2600 game SpaceInvaders. In this environment, the observation is the RAM of the Atari machine, consisting of (only!) 128 bytes. Each action is repeatedly performed for a duration of k*k* frames, where k*k* is uniformly sampled from \{2, 3, 4\}{2,3,4}.
+* Qbert-ram-v0
 
+  玩家通过操纵游戏角色，在躲避敌人与障碍物的同时，将方块改为目标颜色。
 
+  ![Qbert-ram-v0.gif](https://upload-images.jianshu.io/upload_images/15463866-010a9c3f8f8379ff.gif?imageMogr2/auto-orient/strip)
 
+* Seaquest-ram-v0
 
+  水下射击游戏
 
+  ![Seaquest-ram-v0.gif](https://upload-images.jianshu.io/upload_images/15463866-6fcd3ac715ae75cf.gif?imageMogr2/auto-orient/strip)
 
+* SpaceInvaders-ram-v0
+
+  ![SpaceInvaders-ram-v0.gif](https://upload-images.jianshu.io/upload_images/15463866-1ad8a29f483a8bac.gif?imageMogr2/auto-orient/strip)
 
 ## 6、机器人环境（Robotics）
 
-* # FetchPickAndPlace-v1
+* FetchPickAndPlace-v1
 
-  A goal is randomly chosen in 3D space. Control Fetch's end effector to grasp and lift the block up to reach that goal.
+  训练智能体在一个3D环境中抓取一个随机选取的目标,然后把它放到。
 
-* # FetchPush-v1
+  ![FetchPickAndPlace-v1.gif](https://upload-images.jianshu.io/upload_images/15463866-f99556d4c8be9870.gif?imageMogr2/auto-orient/strip)
 
-  A goal position is randomly chosen on the table surface. Control Fetch's end effector to push the block towards that position..
+* FetchPush-v1
 
-* # FetchReach-v1
+  训练智能体在一个3D环境中将一个随机的目标推到指定位置。
 
-  A goal position is randomly chosen in 3D space. Control Fetch's end effector to reach that goal as quickly as possible.
+  ![FetchPush-v1.gif](https://upload-images.jianshu.io/upload_images/15463866-2001e626cc653a71.gif?imageMogr2/auto-orient/strip)
 
-* # FetchSlide-v1
+* FetchReach-v1
 
-  A goal position is chosen on the table in front of Fetch, out of reach for the robot. Control Fetch's end effector to slide the given puck to this goal.
+  训练智能体，让他尽可能快的触碰到随机目标。
 
-* # HandManipulateBlock-v0
+  ![FetchReach-v1.gif](https://upload-images.jianshu.io/upload_images/15463866-2ded9570e4fada01.gif?imageMogr2/auto-orient/strip)
 
-  A goal orientation is randomly chosen for a block which is placed in the ShadowHand's grip. Control the ShadowHand actuators to reach the given target orientation for the block.
+* FetchSlide-v1
 
-* # HandManipulateEgg-v0
+  这个环境中智能体需要学会把一个圆盘推到一个无法触碰到的随机目标旁边。
 
-  A goal orientation is randomly chosen for an egg which is placed in the ShadowHand's grip. Control the ShadowHand actuators to reach the given target orientation for the egg.
+  ![FetchSlide-v1.gif](https://upload-images.jianshu.io/upload_images/15463866-d00564ae617f25d9.gif?imageMogr2/auto-orient/strip)
 
-* # HandManipulatePen-v0
+* HandManipulateBlock-v0
 
-  A goal orientation is randomly chosen for a pen which is placed in the ShadowHand's grip. Control the ShadowHand actuators to reach the given target orientation for the pen.
+  需要控制机械手臂把随机摆放的方块旋转到目标样式。
 
-* # HandReach-v0
+  ![HandManipulateBlock-v0.gif](https://upload-images.jianshu.io/upload_images/15463866-53604df599f60266.gif?imageMogr2/auto-orient/strip)
 
-  A goal hand pose is randomly chosen in 3D space. Control the ShadowHand actuators to reach this position for all the five fingers.
+* HandManipulateEgg-v0
 
-## 7、文字游戏环境（Toy text）
+  机械手臂手上有个鸡蛋形状的物体，需要训练机械手臂学会旋转他到指定的方向。
 
-Simple text environments to get you started.
+  ![HandManipulateEgg-v0.gif](https://upload-images.jianshu.io/upload_images/15463866-331dae093ab866a7.gif?imageMogr2/auto-orient/strip)
 
-# Blackjack-v0
+* HandManipulatePen-v0
 
-# GuessingGame-v0
+  训练机器臂将笔摆到指定的随机位置。
 
-> The goal of the game is to guess within 1% of the randomly chosen number within 200 time steps
->
-> After each step the agent is provided with one of four possible observations which indicate where the guess is in relation to the randomly chosen number
->
-> 0 - No guess yet submitted (only after reset) 1 - Guess is lower than the target 2 - Guess is equal to the target 3 - Guess is higher than the target
->
-> The rewards are: 0 if the agent's guess is outside of 1% of the target 1 if the agent's guess is inside 1% of the target
->
-> The episode terminates after the agent guesses within 1% of the target or 200 steps have been taken
->
-> The agent will need to use a memory of previously submitted actions and observations in order to efficiently explore the available actions.
+  
 
-# HotterColder-v0
+  ![HandManipulatePen-v0.gif](https://upload-images.jianshu.io/upload_images/15463866-2cfb5ed3861fab11.gif?imageMogr2/auto-orient/strip)
 
-> The goal of the game is to effective use the reward provided in order to understand the best action to take.
->
-> After each step the agent receives an observation of: 0 - No guess yet submitted (only after reset) 1 - Guess is lower than the target 2 - Guess is equal to the target 3 - Guess is higher than the target
->
-> The rewards is calculated as: ((min(action, self.number) + self.bounds) / (max(action, self.number) + self.bounds)) ** 2 This is essentially the squared percentage of the way the agent has guessed toward the target.
->
-> Ideally an agent will be able to recognise the 'scent' of a higher reward and increase the rate in which is guesses in that direction until the reward reaches its maximum.
+* HandReach-v0
 
-# NChain-v0
+  训练智能体将污垢手指都摆放为目标姿势。
+  
+  ![HandReach-v0.gif](https://upload-images.jianshu.io/upload_images/15463866-14a7316d68015991.gif?imageMogr2/auto-orient/strip)
 
-> n-Chain environment
->
-> - This game presents moves along a linear chain of states, with two actions:
->
->   forward, which moves along the chain but returns no rewardbackward, which returns to the beginning and has a small reward
->
-> The end of the chain, however, presents a large reward, and by moving 'forward' at the end of the chain this large reward can be repeated.
->
-> At each action, there is a small probability that the agent 'slips' and the opposite transition is instead taken.
->
-> The observed state is the current state in the chain (0 to n-1).
+## 7、文本游戏环境（Toy text）
 
-# Roulette-v0
+* Blackjack-v0
 
-The agent plays 0-to-36 Roulette in a modified casino setting. For each spin, the agent bets on a number. The agent receives a positive reward iff the rolled number is not zero and its parity matches the agent's bet. Additionally, the agent can choose to walk away from the table, ending the episode.
+  游戏规则：
 
-# FrozenLake-v0
+  拥有最高点数的玩家获胜，其点数必须等于或低于21点；超过21点的玩家称为爆牌（Bust）。2点至10点的牌以牌面的点数计算，J、Q、K 每张为10点。A可记为1点或为11点，而2-10则按牌面点数算，若玩家会因A而爆牌则A可算为1点。当一手牌中的A算为11点时，这手牌便称为“软牌”（soft hand），因为除非玩者再拿另一张牌，否则不会出现爆牌。
 
-The agent controls the movement of a character in a grid world. Some tiles of the grid are walkable, and others lead to the agent falling into the water. Additionally, the movement direction of the agent is uncertain and only partially depends on the chosen direction. The agent is rewarded for finding a walkable path to a goal tile.
+  庄家在取得17点之前必须要牌，因规则不同会有软17点或硬17点才停牌的具体区分。
 
-# FrozenLake8x8-v0
+  每位玩家的目的是要取得最接近21点数的牌来击败庄家，但同时要避免爆牌。要注意的是，若玩家爆牌在先即为输，就算随后庄家爆牌也是如此。若玩家和庄家拥有同样点数，这样的状态称为“push”，玩家和庄家皆不算输赢。每位玩者和庄家之间的游戏都是独立的，因此在同一局内，庄家有可能会输给某些玩家，但也同时击败另一些玩家。
 
-The agent controls the movement of a character in a grid world. Some tiles of the grid are walkable, and others lead to the agent falling into the water. Additionally, the movement direction of the agent is uncertain and only partially depends on the chosen direction. The agent is rewarded for finding a walkable path to a goal tile.
+  牌桌上通常会印有最小和最大的赌注，每一间赌场的每一张牌桌的限额都可能不同。在第一笔筹码下注后，庄家开始发牌，若是从一副或两副牌中发牌，称为“pitch”牌局；较常见的则是从四副牌中发牌。庄家会发给每位玩家和自己两张牌，庄家的两张牌中会有一张是点数朝上的“明牌”，所有玩家皆可看见，另一张则是点数朝下的“暗牌”。若是四副牌时，发牌时点数会朝上，若为“pitch”牌局则发牌时点数朝下。
 
-# Taxi-v3
+* GuessingGame-v0
 
-This task was introduced in [Dietterich2000] to illustrate some issues in hierarchical reinforcement learning. There are 4 locations (labeled by different letters) and your job is to pick up the passenger at one location and drop him off in another. You receive +20 points for a successful dropoff, and lose 1 point for every timestep it takes. There is also a 10 point penalty for illegal pick-up and drop-off actions.
+  游戏的目标是在200个时间步内猜测一个随机数，并允许1%的误差。在每个步骤之后，为智能体提供四个可能的观察之一，该观察包含的信息为：0-尚未提交任何猜测（仅在重置后），1-猜测低于目标，2-猜测等于目标，3-猜测高于目标
+
+  奖励为：猜测结果在目标1%之内奖励1，否则奖励0。 
+
+* HotterColder-v0
+
+  这个游戏与GuessingGame-v0差不多，但是目标是让智能体可以有效利用奖励来采取最佳行动。
+
+  在每个步骤之后，智能体都会收到以下观察结果：0-尚未提交任何猜测（仅在重置后，1-猜测低于目标，2-猜测等于目标，3-猜测高于目标
+
+  奖励的计算公式为： 
+  $$
+  (\frac{min(action, self.number) + self.bounds}{max(action, self.number) + self.bounds)})^2
+  $$
+  这样的奖励的设计方式实际上是对猜测结果的百分比做了一个平方，结果更能反馈猜测结果与目标的差距。
+
+* NChain-v0
+
+  n-chain环境，智能体在一个n-chain的一维空间上前后移动，先前移动没有任何奖励，向后移动会有少量奖励。但是，链尾提供了很大的奖励，通过在链的末尾移动“前进”，可以重复此奖励。
 
 
+* Roulette-v0
 
+  这是智能体玩一个有0-36数字的轮盘（赌场那种轮盘游戏）。每次旋转轮盘，智能体都下注一个数字（0-36），如果结果不是0，并且与下注部分匹配则得到正奖励。同时，智能体可以随之选择离场。
 
+* FrozenLake-v0
+
+  FrozenLake环境就是一个GridWorld环境，名字是指在一块冰面上有四种state：
+
+  S: initial stat 起点
+
+  F: frozen lake 冰湖
+
+  H: hole 窟窿
+
+  G: the goal 目的地
+
+  智能体要学会从起点走到目的地，并且不要掉进窟窿。
+
+![FrozenLake-v0.gif](https://upload-images.jianshu.io/upload_images/15463866-21441dfd94b8aec9.gif?imageMogr2/auto-orient/strip)
+
+* FrozenLake8x8-v0
+
+  8*8的FrozenLake
+
+![FrozenLake8x8-v0.gif](https://upload-images.jianshu.io/upload_images/15463866-82e23a8698aba270.gif?imageMogr2/auto-orient/strip)
+
+* Taxi-v3
+
+  这个任务是在《Hierarchical Reinforcement Learning with the MAXQ Value Function Decomposition》这篇论文中引用，来论述分层强化学习中的问题。设定中有4个用不同字母标记的四个点（R,G,Y,B）。智能体作为出租车，在一个点接客，然后在另一个点下车。成功下客获得+20奖励，每个时间步奖励-1。如果接送行为错了-10分。
+
+![Taxi-v3.gif](https://upload-images.jianshu.io/upload_images/15463866-3b29849203df898c.gif?imageMogr2/auto-orient/strip)
 
 ## 8、其他注册的环境
 
@@ -277,862 +418,201 @@ print(envs.registry.all())
 
 这里列出来在0.17.3版本以查询到的所有环境：
 
- dict_values([EnvSpec(Copy-v0)
- EnvSpec(RepeatCopy-v0)
- EnvSpec(ReversedAddition-v0)
- EnvSpec(ReversedAddition3-v0)
- EnvSpec(DuplicatedInput-v0)
- EnvSpec(Reverse-v0)
- EnvSpec(CartPole-v0)
- EnvSpec(CartPole-v1)
- EnvSpec(MountainCar-v0)
- EnvSpec(MountainCarContinuous-v0)
- EnvSpec(Pendulum-v0)
- EnvSpec(Acrobot-v1)
- EnvSpec(LunarLander-v2)
- EnvSpec(LunarLanderContinuous-v2)
- EnvSpec(BipedalWalker-v3)
- EnvSpec(BipedalWalkerHardcore-v3)
- EnvSpec(CarRacing-v0)
- EnvSpec(Blackjack-v0)
- EnvSpec(KellyCoinflip-v0)
- EnvSpec(KellyCoinflipGeneralized-v0)
- EnvSpec(FrozenLake-v0)
- EnvSpec(FrozenLake8x8-v0)
- EnvSpec(CliffWalking-v0)
- EnvSpec(NChain-v0)
- EnvSpec(Roulette-v0)
- EnvSpec(Taxi-v3)
- EnvSpec(GuessingGame-v0)
- EnvSpec(HotterColder-v0)
- EnvSpec(Reacher-v2)
- EnvSpec(Pusher-v2)
- EnvSpec(Thrower-v2)
- EnvSpec(Striker-v2)
- EnvSpec(InvertedPendulum-v2)
- EnvSpec(InvertedDoublePendulum-v2)
- EnvSpec(HalfCheetah-v2)
- EnvSpec(HalfCheetah-v3)
- EnvSpec(Hopper-v2)
- EnvSpec(Hopper-v3)
- EnvSpec(Swimmer-v2)
- EnvSpec(Swimmer-v3)
- EnvSpec(Walker2d-v2)
- EnvSpec(Walker2d-v3)
- EnvSpec(Ant-v2)
- EnvSpec(Ant-v3)
- EnvSpec(Humanoid-v2)
- EnvSpec(Humanoid-v3)
- EnvSpec(HumanoidStandup-v2)
- EnvSpec(FetchSlide-v1)
- EnvSpec(FetchPickAndPlace-v1)
- EnvSpec(FetchReach-v1)
- EnvSpec(FetchPush-v1)
- EnvSpec(HandReach-v0)
- EnvSpec(HandManipulateBlockRotateZ-v0)
- EnvSpec(HandManipulateBlockRotateZTouchSensors-v0)
- EnvSpec(HandManipulateBlockRotateZTouchSensors-v1)
- EnvSpec(HandManipulateBlockRotateParallel-v0)
- EnvSpec(HandManipulateBlockRotateParallelTouchSensors-v0)
- EnvSpec(HandManipulateBlockRotateParallelTouchSensors-v1)
- EnvSpec(HandManipulateBlockRotateXYZ-v0)
- EnvSpec(HandManipulateBlockRotateXYZTouchSensors-v0)
- EnvSpec(HandManipulateBlockRotateXYZTouchSensors-v1)
- EnvSpec(HandManipulateBlockFull-v0)
- EnvSpec(HandManipulateBlock-v0)
- EnvSpec(HandManipulateBlockTouchSensors-v0)
- EnvSpec(HandManipulateBlockTouchSensors-v1)
- EnvSpec(HandManipulateEggRotate-v0)
- EnvSpec(HandManipulateEggRotateTouchSensors-v0)
- EnvSpec(HandManipulateEggRotateTouchSensors-v1)
- EnvSpec(HandManipulateEggFull-v0)
- EnvSpec(HandManipulateEgg-v0)
- EnvSpec(HandManipulateEggTouchSensors-v0)
- EnvSpec(HandManipulateEggTouchSensors-v1)
- EnvSpec(HandManipulatePenRotate-v0)
- EnvSpec(HandManipulatePenRotateTouchSensors-v0)
- EnvSpec(HandManipulatePenRotateTouchSensors-v1)
- EnvSpec(HandManipulatePenFull-v0)
- EnvSpec(HandManipulatePen-v0)
- EnvSpec(HandManipulatePenTouchSensors-v0)
- EnvSpec(HandManipulatePenTouchSensors-v1)
- EnvSpec(FetchSlideDense-v1)
- EnvSpec(FetchPickAndPlaceDense-v1)
- EnvSpec(FetchReachDense-v1)
- EnvSpec(FetchPushDense-v1)
- EnvSpec(HandReachDense-v0)
- EnvSpec(HandManipulateBlockRotateZDense-v0)
- EnvSpec(HandManipulateBlockRotateZTouchSensorsDense-v0)
- EnvSpec(HandManipulateBlockRotateZTouchSensorsDense-v1)
- EnvSpec(HandManipulateBlockRotateParallelDense-v0)
- EnvSpec(HandManipulateBlockRotateParallelTouchSensorsDense-v0)
- EnvSpec(HandManipulateBlockRotateParallelTouchSensorsDense-v1)
- EnvSpec(HandManipulateBlockRotateXYZDense-v0)
- EnvSpec(HandManipulateBlockRotateXYZTouchSensorsDense-v0)
- EnvSpec(HandManipulateBlockRotateXYZTouchSensorsDense-v1)
- EnvSpec(HandManipulateBlockFullDense-v0)
- EnvSpec(HandManipulateBlockDense-v0)
- EnvSpec(HandManipulateBlockTouchSensorsDense-v0)
- EnvSpec(HandManipulateBlockTouchSensorsDense-v1)
- EnvSpec(HandManipulateEggRotateDense-v0)
- EnvSpec(HandManipulateEggRotateTouchSensorsDense-v0)
- EnvSpec(HandManipulateEggRotateTouchSensorsDense-v1)
- EnvSpec(HandManipulateEggFullDense-v0)
- EnvSpec(HandManipulateEggDense-v0)
- EnvSpec(HandManipulateEggTouchSensorsDense-v0)
- EnvSpec(HandManipulateEggTouchSensorsDense-v1)
- EnvSpec(HandManipulatePenRotateDense-v0)
- EnvSpec(HandManipulatePenRotateTouchSensorsDense-v0)
- EnvSpec(HandManipulatePenRotateTouchSensorsDense-v1)
- EnvSpec(HandManipulatePenFullDense-v0)
- EnvSpec(HandManipulatePenDense-v0)
- EnvSpec(HandManipulatePenTouchSensorsDense-v0)
- EnvSpec(HandManipulatePenTouchSensorsDense-v1)
- EnvSpec(Adventure-v0)
- EnvSpec(Adventure-v4)
- EnvSpec(AdventureDeterministic-v0)
- EnvSpec(AdventureDeterministic-v4)
- EnvSpec(AdventureNoFrameskip-v0)
- EnvSpec(AdventureNoFrameskip-v4)
- EnvSpec(Adventure-ram-v0)
- EnvSpec(Adventure-ram-v4)
- EnvSpec(Adventure-ramDeterministic-v0)
- EnvSpec(Adventure-ramDeterministic-v4)
- EnvSpec(Adventure-ramNoFrameskip-v0)
- EnvSpec(Adventure-ramNoFrameskip-v4)
- EnvSpec(AirRaid-v0)
- EnvSpec(AirRaid-v4)
- EnvSpec(AirRaidDeterministic-v0)
- EnvSpec(AirRaidDeterministic-v4)
- EnvSpec(AirRaidNoFrameskip-v0)
- EnvSpec(AirRaidNoFrameskip-v4)
- EnvSpec(AirRaid-ram-v0)
- EnvSpec(AirRaid-ram-v4)
- EnvSpec(AirRaid-ramDeterministic-v0)
- EnvSpec(AirRaid-ramDeterministic-v4)
- EnvSpec(AirRaid-ramNoFrameskip-v0)
- EnvSpec(AirRaid-ramNoFrameskip-v4)
- EnvSpec(Alien-v0)
- EnvSpec(Alien-v4)
- EnvSpec(AlienDeterministic-v0)
- EnvSpec(AlienDeterministic-v4)
- EnvSpec(AlienNoFrameskip-v0)
- EnvSpec(AlienNoFrameskip-v4)
- EnvSpec(Alien-ram-v0)
- EnvSpec(Alien-ram-v4)
- EnvSpec(Alien-ramDeterministic-v0)
- EnvSpec(Alien-ramDeterministic-v4)
- EnvSpec(Alien-ramNoFrameskip-v0)
- EnvSpec(Alien-ramNoFrameskip-v4)
- EnvSpec(Amidar-v0)
- EnvSpec(Amidar-v4)
- EnvSpec(AmidarDeterministic-v0)
- EnvSpec(AmidarDeterministic-v4)
- EnvSpec(AmidarNoFrameskip-v0)
- EnvSpec(AmidarNoFrameskip-v4)
- EnvSpec(Amidar-ram-v0)
- EnvSpec(Amidar-ram-v4)
- EnvSpec(Amidar-ramDeterministic-v0)
- EnvSpec(Amidar-ramDeterministic-v4)
- EnvSpec(Amidar-ramNoFrameskip-v0)
- EnvSpec(Amidar-ramNoFrameskip-v4)
- EnvSpec(Assault-v0)
- EnvSpec(Assault-v4)
- EnvSpec(AssaultDeterministic-v0)
- EnvSpec(AssaultDeterministic-v4)
- EnvSpec(AssaultNoFrameskip-v0)
- EnvSpec(AssaultNoFrameskip-v4)
- EnvSpec(Assault-ram-v0)
- EnvSpec(Assault-ram-v4)
- EnvSpec(Assault-ramDeterministic-v0)
- EnvSpec(Assault-ramDeterministic-v4)
- EnvSpec(Assault-ramNoFrameskip-v0)
- EnvSpec(Assault-ramNoFrameskip-v4)
- EnvSpec(Asterix-v0)
- EnvSpec(Asterix-v4)
- EnvSpec(AsterixDeterministic-v0)
- EnvSpec(AsterixDeterministic-v4)
- EnvSpec(AsterixNoFrameskip-v0)
- EnvSpec(AsterixNoFrameskip-v4)
- EnvSpec(Asterix-ram-v0)
- EnvSpec(Asterix-ram-v4)
- EnvSpec(Asterix-ramDeterministic-v0)
- EnvSpec(Asterix-ramDeterministic-v4)
- EnvSpec(Asterix-ramNoFrameskip-v0)
- EnvSpec(Asterix-ramNoFrameskip-v4)
- EnvSpec(Asteroids-v0)
- EnvSpec(Asteroids-v4)
- EnvSpec(AsteroidsDeterministic-v0)
- EnvSpec(AsteroidsDeterministic-v4)
- EnvSpec(AsteroidsNoFrameskip-v0)
- EnvSpec(AsteroidsNoFrameskip-v4)
- EnvSpec(Asteroids-ram-v0)
- EnvSpec(Asteroids-ram-v4)
- EnvSpec(Asteroids-ramDeterministic-v0)
- EnvSpec(Asteroids-ramDeterministic-v4)
- EnvSpec(Asteroids-ramNoFrameskip-v0)
- EnvSpec(Asteroids-ramNoFrameskip-v4)
- EnvSpec(Atlantis-v0)
- EnvSpec(Atlantis-v4)
- EnvSpec(AtlantisDeterministic-v0)
- EnvSpec(AtlantisDeterministic-v4)
- EnvSpec(AtlantisNoFrameskip-v0)
- EnvSpec(AtlantisNoFrameskip-v4)
- EnvSpec(Atlantis-ram-v0)
- EnvSpec(Atlantis-ram-v4)
- EnvSpec(Atlantis-ramDeterministic-v0)
- EnvSpec(Atlantis-ramDeterministic-v4)
- EnvSpec(Atlantis-ramNoFrameskip-v0)
- EnvSpec(Atlantis-ramNoFrameskip-v4)
- EnvSpec(BankHeist-v0)
- EnvSpec(BankHeist-v4)
- EnvSpec(BankHeistDeterministic-v0)
- EnvSpec(BankHeistDeterministic-v4)
- EnvSpec(BankHeistNoFrameskip-v0)
- EnvSpec(BankHeistNoFrameskip-v4)
- EnvSpec(BankHeist-ram-v0)
- EnvSpec(BankHeist-ram-v4)
- EnvSpec(BankHeist-ramDeterministic-v0)
- EnvSpec(BankHeist-ramDeterministic-v4)
- EnvSpec(BankHeist-ramNoFrameskip-v0)
- EnvSpec(BankHeist-ramNoFrameskip-v4)
- EnvSpec(BattleZone-v0)
- EnvSpec(BattleZone-v4)
- EnvSpec(BattleZoneDeterministic-v0)
- EnvSpec(BattleZoneDeterministic-v4)
- EnvSpec(BattleZoneNoFrameskip-v0)
- EnvSpec(BattleZoneNoFrameskip-v4)
- EnvSpec(BattleZone-ram-v0)
- EnvSpec(BattleZone-ram-v4)
- EnvSpec(BattleZone-ramDeterministic-v0)
- EnvSpec(BattleZone-ramDeterministic-v4)
- EnvSpec(BattleZone-ramNoFrameskip-v0)
- EnvSpec(BattleZone-ramNoFrameskip-v4)
- EnvSpec(BeamRider-v0)
- EnvSpec(BeamRider-v4)
- EnvSpec(BeamRiderDeterministic-v0)
- EnvSpec(BeamRiderDeterministic-v4)
- EnvSpec(BeamRiderNoFrameskip-v0)
- EnvSpec(BeamRiderNoFrameskip-v4)
- EnvSpec(BeamRider-ram-v0)
- EnvSpec(BeamRider-ram-v4)
- EnvSpec(BeamRider-ramDeterministic-v0)
- EnvSpec(BeamRider-ramDeterministic-v4)
- EnvSpec(BeamRider-ramNoFrameskip-v0)
- EnvSpec(BeamRider-ramNoFrameskip-v4)
- EnvSpec(Berzerk-v0)
- EnvSpec(Berzerk-v4)
- EnvSpec(BerzerkDeterministic-v0)
- EnvSpec(BerzerkDeterministic-v4)
- EnvSpec(BerzerkNoFrameskip-v0)
- EnvSpec(BerzerkNoFrameskip-v4)
- EnvSpec(Berzerk-ram-v0)
- EnvSpec(Berzerk-ram-v4)
- EnvSpec(Berzerk-ramDeterministic-v0)
- EnvSpec(Berzerk-ramDeterministic-v4)
- EnvSpec(Berzerk-ramNoFrameskip-v0)
- EnvSpec(Berzerk-ramNoFrameskip-v4)
- EnvSpec(Bowling-v0)
- EnvSpec(Bowling-v4)
- EnvSpec(BowlingDeterministic-v0)
- EnvSpec(BowlingDeterministic-v4)
- EnvSpec(BowlingNoFrameskip-v0)
- EnvSpec(BowlingNoFrameskip-v4)
- EnvSpec(Bowling-ram-v0)
- EnvSpec(Bowling-ram-v4)
- EnvSpec(Bowling-ramDeterministic-v0)
- EnvSpec(Bowling-ramDeterministic-v4)
- EnvSpec(Bowling-ramNoFrameskip-v0)
- EnvSpec(Bowling-ramNoFrameskip-v4)
- EnvSpec(Boxing-v0)
- EnvSpec(Boxing-v4)
- EnvSpec(BoxingDeterministic-v0)
- EnvSpec(BoxingDeterministic-v4)
- EnvSpec(BoxingNoFrameskip-v0)
- EnvSpec(BoxingNoFrameskip-v4)
- EnvSpec(Boxing-ram-v0)
- EnvSpec(Boxing-ram-v4)
- EnvSpec(Boxing-ramDeterministic-v0)
- EnvSpec(Boxing-ramDeterministic-v4)
- EnvSpec(Boxing-ramNoFrameskip-v0)
- EnvSpec(Boxing-ramNoFrameskip-v4)
- EnvSpec(Breakout-v0)
- EnvSpec(Breakout-v4)
- EnvSpec(BreakoutDeterministic-v0)
- EnvSpec(BreakoutDeterministic-v4)
- EnvSpec(BreakoutNoFrameskip-v0)
- EnvSpec(BreakoutNoFrameskip-v4)
- EnvSpec(Breakout-ram-v0)
- EnvSpec(Breakout-ram-v4)
- EnvSpec(Breakout-ramDeterministic-v0)
- EnvSpec(Breakout-ramDeterministic-v4)
- EnvSpec(Breakout-ramNoFrameskip-v0)
- EnvSpec(Breakout-ramNoFrameskip-v4)
- EnvSpec(Carnival-v0)
- EnvSpec(Carnival-v4)
- EnvSpec(CarnivalDeterministic-v0)
- EnvSpec(CarnivalDeterministic-v4)
- EnvSpec(CarnivalNoFrameskip-v0)
- EnvSpec(CarnivalNoFrameskip-v4)
- EnvSpec(Carnival-ram-v0)
- EnvSpec(Carnival-ram-v4)
- EnvSpec(Carnival-ramDeterministic-v0)
- EnvSpec(Carnival-ramDeterministic-v4)
- EnvSpec(Carnival-ramNoFrameskip-v0)
- EnvSpec(Carnival-ramNoFrameskip-v4)
- EnvSpec(Centipede-v0)
- EnvSpec(Centipede-v4)
- EnvSpec(CentipedeDeterministic-v0)
- EnvSpec(CentipedeDeterministic-v4)
- EnvSpec(CentipedeNoFrameskip-v0)
- EnvSpec(CentipedeNoFrameskip-v4)
- EnvSpec(Centipede-ram-v0)
- EnvSpec(Centipede-ram-v4)
- EnvSpec(Centipede-ramDeterministic-v0)
- EnvSpec(Centipede-ramDeterministic-v4)
- EnvSpec(Centipede-ramNoFrameskip-v0)
- EnvSpec(Centipede-ramNoFrameskip-v4)
- EnvSpec(ChopperCommand-v0)
- EnvSpec(ChopperCommand-v4)
- EnvSpec(ChopperCommandDeterministic-v0)
- EnvSpec(ChopperCommandDeterministic-v4)
- EnvSpec(ChopperCommandNoFrameskip-v0)
- EnvSpec(ChopperCommandNoFrameskip-v4)
- EnvSpec(ChopperCommand-ram-v0)
- EnvSpec(ChopperCommand-ram-v4)
- EnvSpec(ChopperCommand-ramDeterministic-v0)
- EnvSpec(ChopperCommand-ramDeterministic-v4)
- EnvSpec(ChopperCommand-ramNoFrameskip-v0)
- EnvSpec(ChopperCommand-ramNoFrameskip-v4)
- EnvSpec(CrazyClimber-v0)
- EnvSpec(CrazyClimber-v4)
- EnvSpec(CrazyClimberDeterministic-v0)
- EnvSpec(CrazyClimberDeterministic-v4)
- EnvSpec(CrazyClimberNoFrameskip-v0)
- EnvSpec(CrazyClimberNoFrameskip-v4)
- EnvSpec(CrazyClimber-ram-v0)
- EnvSpec(CrazyClimber-ram-v4)
- EnvSpec(CrazyClimber-ramDeterministic-v0)
- EnvSpec(CrazyClimber-ramDeterministic-v4)
- EnvSpec(CrazyClimber-ramNoFrameskip-v0)
- EnvSpec(CrazyClimber-ramNoFrameskip-v4)
- EnvSpec(Defender-v0)
- EnvSpec(Defender-v4)
- EnvSpec(DefenderDeterministic-v0)
- EnvSpec(DefenderDeterministic-v4)
- EnvSpec(DefenderNoFrameskip-v0)
- EnvSpec(DefenderNoFrameskip-v4)
- EnvSpec(Defender-ram-v0)
- EnvSpec(Defender-ram-v4)
- EnvSpec(Defender-ramDeterministic-v0)
- EnvSpec(Defender-ramDeterministic-v4)
- EnvSpec(Defender-ramNoFrameskip-v0)
- EnvSpec(Defender-ramNoFrameskip-v4)
- EnvSpec(DemonAttack-v0)
- EnvSpec(DemonAttack-v4)
- EnvSpec(DemonAttackDeterministic-v0)
- EnvSpec(DemonAttackDeterministic-v4)
- EnvSpec(DemonAttackNoFrameskip-v0)
- EnvSpec(DemonAttackNoFrameskip-v4)
- EnvSpec(DemonAttack-ram-v0)
- EnvSpec(DemonAttack-ram-v4)
- EnvSpec(DemonAttack-ramDeterministic-v0)
- EnvSpec(DemonAttack-ramDeterministic-v4)
- EnvSpec(DemonAttack-ramNoFrameskip-v0)
- EnvSpec(DemonAttack-ramNoFrameskip-v4)
- EnvSpec(DoubleDunk-v0)
- EnvSpec(DoubleDunk-v4)
- EnvSpec(DoubleDunkDeterministic-v0)
- EnvSpec(DoubleDunkDeterministic-v4)
- EnvSpec(DoubleDunkNoFrameskip-v0)
- EnvSpec(DoubleDunkNoFrameskip-v4)
- EnvSpec(DoubleDunk-ram-v0)
- EnvSpec(DoubleDunk-ram-v4)
- EnvSpec(DoubleDunk-ramDeterministic-v0)
- EnvSpec(DoubleDunk-ramDeterministic-v4)
- EnvSpec(DoubleDunk-ramNoFrameskip-v0)
- EnvSpec(DoubleDunk-ramNoFrameskip-v4)
- EnvSpec(ElevatorAction-v0)
- EnvSpec(ElevatorAction-v4)
- EnvSpec(ElevatorActionDeterministic-v0)
- EnvSpec(ElevatorActionDeterministic-v4)
- EnvSpec(ElevatorActionNoFrameskip-v0)
- EnvSpec(ElevatorActionNoFrameskip-v4)
- EnvSpec(ElevatorAction-ram-v0)
- EnvSpec(ElevatorAction-ram-v4)
- EnvSpec(ElevatorAction-ramDeterministic-v0)
- EnvSpec(ElevatorAction-ramDeterministic-v4)
- EnvSpec(ElevatorAction-ramNoFrameskip-v0)
- EnvSpec(ElevatorAction-ramNoFrameskip-v4)
- EnvSpec(Enduro-v0)
- EnvSpec(Enduro-v4)
- EnvSpec(EnduroDeterministic-v0)
- EnvSpec(EnduroDeterministic-v4)
- EnvSpec(EnduroNoFrameskip-v0)
- EnvSpec(EnduroNoFrameskip-v4)
- EnvSpec(Enduro-ram-v0)
- EnvSpec(Enduro-ram-v4)
- EnvSpec(Enduro-ramDeterministic-v0)
- EnvSpec(Enduro-ramDeterministic-v4)
- EnvSpec(Enduro-ramNoFrameskip-v0)
- EnvSpec(Enduro-ramNoFrameskip-v4)
- EnvSpec(FishingDerby-v0)
- EnvSpec(FishingDerby-v4)
- EnvSpec(FishingDerbyDeterministic-v0)
- EnvSpec(FishingDerbyDeterministic-v4)
- EnvSpec(FishingDerbyNoFrameskip-v0)
- EnvSpec(FishingDerbyNoFrameskip-v4)
- EnvSpec(FishingDerby-ram-v0)
- EnvSpec(FishingDerby-ram-v4)
- EnvSpec(FishingDerby-ramDeterministic-v0)
- EnvSpec(FishingDerby-ramDeterministic-v4)
- EnvSpec(FishingDerby-ramNoFrameskip-v0)
- EnvSpec(FishingDerby-ramNoFrameskip-v4)
- EnvSpec(Freeway-v0)
- EnvSpec(Freeway-v4)
- EnvSpec(FreewayDeterministic-v0)
- EnvSpec(FreewayDeterministic-v4)
- EnvSpec(FreewayNoFrameskip-v0)
- EnvSpec(FreewayNoFrameskip-v4)
- EnvSpec(Freeway-ram-v0)
- EnvSpec(Freeway-ram-v4)
- EnvSpec(Freeway-ramDeterministic-v0)
- EnvSpec(Freeway-ramDeterministic-v4)
- EnvSpec(Freeway-ramNoFrameskip-v0)
- EnvSpec(Freeway-ramNoFrameskip-v4)
- EnvSpec(Frostbite-v0)
- EnvSpec(Frostbite-v4)
- EnvSpec(FrostbiteDeterministic-v0)
- EnvSpec(FrostbiteDeterministic-v4)
- EnvSpec(FrostbiteNoFrameskip-v0)
- EnvSpec(FrostbiteNoFrameskip-v4)
- EnvSpec(Frostbite-ram-v0)
- EnvSpec(Frostbite-ram-v4)
- EnvSpec(Frostbite-ramDeterministic-v0)
- EnvSpec(Frostbite-ramDeterministic-v4)
- EnvSpec(Frostbite-ramNoFrameskip-v0)
- EnvSpec(Frostbite-ramNoFrameskip-v4)
- EnvSpec(Gopher-v0)
- EnvSpec(Gopher-v4)
- EnvSpec(GopherDeterministic-v0)
- EnvSpec(GopherDeterministic-v4)
- EnvSpec(GopherNoFrameskip-v0)
- EnvSpec(GopherNoFrameskip-v4)
- EnvSpec(Gopher-ram-v0)
- EnvSpec(Gopher-ram-v4)
- EnvSpec(Gopher-ramDeterministic-v0)
- EnvSpec(Gopher-ramDeterministic-v4)
- EnvSpec(Gopher-ramNoFrameskip-v0)
- EnvSpec(Gopher-ramNoFrameskip-v4)
- EnvSpec(Gravitar-v0)
- EnvSpec(Gravitar-v4)
- EnvSpec(GravitarDeterministic-v0)
- EnvSpec(GravitarDeterministic-v4)
- EnvSpec(GravitarNoFrameskip-v0)
- EnvSpec(GravitarNoFrameskip-v4)
- EnvSpec(Gravitar-ram-v0)
- EnvSpec(Gravitar-ram-v4)
- EnvSpec(Gravitar-ramDeterministic-v0)
- EnvSpec(Gravitar-ramDeterministic-v4)
- EnvSpec(Gravitar-ramNoFrameskip-v0)
- EnvSpec(Gravitar-ramNoFrameskip-v4)
- EnvSpec(Hero-v0)
- EnvSpec(Hero-v4)
- EnvSpec(HeroDeterministic-v0)
- EnvSpec(HeroDeterministic-v4)
- EnvSpec(HeroNoFrameskip-v0)
- EnvSpec(HeroNoFrameskip-v4)
- EnvSpec(Hero-ram-v0)
- EnvSpec(Hero-ram-v4)
- EnvSpec(Hero-ramDeterministic-v0)
- EnvSpec(Hero-ramDeterministic-v4)
- EnvSpec(Hero-ramNoFrameskip-v0)
- EnvSpec(Hero-ramNoFrameskip-v4)
- EnvSpec(IceHockey-v0)
- EnvSpec(IceHockey-v4)
- EnvSpec(IceHockeyDeterministic-v0)
- EnvSpec(IceHockeyDeterministic-v4)
- EnvSpec(IceHockeyNoFrameskip-v0)
- EnvSpec(IceHockeyNoFrameskip-v4)
- EnvSpec(IceHockey-ram-v0)
- EnvSpec(IceHockey-ram-v4)
- EnvSpec(IceHockey-ramDeterministic-v0)
- EnvSpec(IceHockey-ramDeterministic-v4)
- EnvSpec(IceHockey-ramNoFrameskip-v0)
- EnvSpec(IceHockey-ramNoFrameskip-v4)
- EnvSpec(Jamesbond-v0)
- EnvSpec(Jamesbond-v4)
- EnvSpec(JamesbondDeterministic-v0)
- EnvSpec(JamesbondDeterministic-v4)
- EnvSpec(JamesbondNoFrameskip-v0)
- EnvSpec(JamesbondNoFrameskip-v4)
- EnvSpec(Jamesbond-ram-v0)
- EnvSpec(Jamesbond-ram-v4)
- EnvSpec(Jamesbond-ramDeterministic-v0)
- EnvSpec(Jamesbond-ramDeterministic-v4)
- EnvSpec(Jamesbond-ramNoFrameskip-v0)
- EnvSpec(Jamesbond-ramNoFrameskip-v4)
- EnvSpec(JourneyEscape-v0)
- EnvSpec(JourneyEscape-v4)
- EnvSpec(JourneyEscapeDeterministic-v0)
- EnvSpec(JourneyEscapeDeterministic-v4)
- EnvSpec(JourneyEscapeNoFrameskip-v0)
- EnvSpec(JourneyEscapeNoFrameskip-v4)
- EnvSpec(JourneyEscape-ram-v0)
- EnvSpec(JourneyEscape-ram-v4)
- EnvSpec(JourneyEscape-ramDeterministic-v0)
- EnvSpec(JourneyEscape-ramDeterministic-v4)
- EnvSpec(JourneyEscape-ramNoFrameskip-v0)
- EnvSpec(JourneyEscape-ramNoFrameskip-v4)
- EnvSpec(Kangaroo-v0)
- EnvSpec(Kangaroo-v4)
- EnvSpec(KangarooDeterministic-v0)
- EnvSpec(KangarooDeterministic-v4)
- EnvSpec(KangarooNoFrameskip-v0)
- EnvSpec(KangarooNoFrameskip-v4)
- EnvSpec(Kangaroo-ram-v0)
- EnvSpec(Kangaroo-ram-v4)
- EnvSpec(Kangaroo-ramDeterministic-v0)
- EnvSpec(Kangaroo-ramDeterministic-v4)
- EnvSpec(Kangaroo-ramNoFrameskip-v0)
- EnvSpec(Kangaroo-ramNoFrameskip-v4)
- EnvSpec(Krull-v0)
- EnvSpec(Krull-v4)
- EnvSpec(KrullDeterministic-v0)
- EnvSpec(KrullDeterministic-v4)
- EnvSpec(KrullNoFrameskip-v0)
- EnvSpec(KrullNoFrameskip-v4)
- EnvSpec(Krull-ram-v0)
- EnvSpec(Krull-ram-v4)
- EnvSpec(Krull-ramDeterministic-v0)
- EnvSpec(Krull-ramDeterministic-v4)
- EnvSpec(Krull-ramNoFrameskip-v0)
- EnvSpec(Krull-ramNoFrameskip-v4)
- EnvSpec(KungFuMaster-v0)
- EnvSpec(KungFuMaster-v4)
- EnvSpec(KungFuMasterDeterministic-v0)
- EnvSpec(KungFuMasterDeterministic-v4)
- EnvSpec(KungFuMasterNoFrameskip-v0)
- EnvSpec(KungFuMasterNoFrameskip-v4)
- EnvSpec(KungFuMaster-ram-v0)
- EnvSpec(KungFuMaster-ram-v4)
- EnvSpec(KungFuMaster-ramDeterministic-v0)
- EnvSpec(KungFuMaster-ramDeterministic-v4)
- EnvSpec(KungFuMaster-ramNoFrameskip-v0)
- EnvSpec(KungFuMaster-ramNoFrameskip-v4)
- EnvSpec(MontezumaRevenge-v0)
- EnvSpec(MontezumaRevenge-v4)
- EnvSpec(MontezumaRevengeDeterministic-v0)
- EnvSpec(MontezumaRevengeDeterministic-v4)
- EnvSpec(MontezumaRevengeNoFrameskip-v0)
- EnvSpec(MontezumaRevengeNoFrameskip-v4)
- EnvSpec(MontezumaRevenge-ram-v0)
- EnvSpec(MontezumaRevenge-ram-v4)
- EnvSpec(MontezumaRevenge-ramDeterministic-v0)
- EnvSpec(MontezumaRevenge-ramDeterministic-v4)
- EnvSpec(MontezumaRevenge-ramNoFrameskip-v0)
- EnvSpec(MontezumaRevenge-ramNoFrameskip-v4)
- EnvSpec(MsPacman-v0)
- EnvSpec(MsPacman-v4)
- EnvSpec(MsPacmanDeterministic-v0)
- EnvSpec(MsPacmanDeterministic-v4)
- EnvSpec(MsPacmanNoFrameskip-v0)
- EnvSpec(MsPacmanNoFrameskip-v4)
- EnvSpec(MsPacman-ram-v0)
- EnvSpec(MsPacman-ram-v4)
- EnvSpec(MsPacman-ramDeterministic-v0)
- EnvSpec(MsPacman-ramDeterministic-v4)
- EnvSpec(MsPacman-ramNoFrameskip-v0)
- EnvSpec(MsPacman-ramNoFrameskip-v4)
- EnvSpec(NameThisGame-v0)
- EnvSpec(NameThisGame-v4)
- EnvSpec(NameThisGameDeterministic-v0)
- EnvSpec(NameThisGameDeterministic-v4)
- EnvSpec(NameThisGameNoFrameskip-v0)
- EnvSpec(NameThisGameNoFrameskip-v4)
- EnvSpec(NameThisGame-ram-v0)
- EnvSpec(NameThisGame-ram-v4)
- EnvSpec(NameThisGame-ramDeterministic-v0)
- EnvSpec(NameThisGame-ramDeterministic-v4)
- EnvSpec(NameThisGame-ramNoFrameskip-v0)
- EnvSpec(NameThisGame-ramNoFrameskip-v4)
- EnvSpec(Phoenix-v0)
- EnvSpec(Phoenix-v4)
- EnvSpec(PhoenixDeterministic-v0)
- EnvSpec(PhoenixDeterministic-v4)
- EnvSpec(PhoenixNoFrameskip-v0)
- EnvSpec(PhoenixNoFrameskip-v4)
- EnvSpec(Phoenix-ram-v0)
- EnvSpec(Phoenix-ram-v4)
- EnvSpec(Phoenix-ramDeterministic-v0)
- EnvSpec(Phoenix-ramDeterministic-v4)
- EnvSpec(Phoenix-ramNoFrameskip-v0)
- EnvSpec(Phoenix-ramNoFrameskip-v4)
- EnvSpec(Pitfall-v0)
- EnvSpec(Pitfall-v4)
- EnvSpec(PitfallDeterministic-v0)
- EnvSpec(PitfallDeterministic-v4)
- EnvSpec(PitfallNoFrameskip-v0)
- EnvSpec(PitfallNoFrameskip-v4)
- EnvSpec(Pitfall-ram-v0)
- EnvSpec(Pitfall-ram-v4)
- EnvSpec(Pitfall-ramDeterministic-v0)
- EnvSpec(Pitfall-ramDeterministic-v4)
- EnvSpec(Pitfall-ramNoFrameskip-v0)
- EnvSpec(Pitfall-ramNoFrameskip-v4)
- EnvSpec(Pong-v0)
- EnvSpec(Pong-v4)
- EnvSpec(PongDeterministic-v0)
- EnvSpec(PongDeterministic-v4)
- EnvSpec(PongNoFrameskip-v0)
- EnvSpec(PongNoFrameskip-v4)
- EnvSpec(Pong-ram-v0)
- EnvSpec(Pong-ram-v4)
- EnvSpec(Pong-ramDeterministic-v0)
- EnvSpec(Pong-ramDeterministic-v4)
- EnvSpec(Pong-ramNoFrameskip-v0)
- EnvSpec(Pong-ramNoFrameskip-v4)
- EnvSpec(Pooyan-v0)
- EnvSpec(Pooyan-v4)
- EnvSpec(PooyanDeterministic-v0)
- EnvSpec(PooyanDeterministic-v4)
- EnvSpec(PooyanNoFrameskip-v0)
- EnvSpec(PooyanNoFrameskip-v4)
- EnvSpec(Pooyan-ram-v0)
- EnvSpec(Pooyan-ram-v4)
- EnvSpec(Pooyan-ramDeterministic-v0)
- EnvSpec(Pooyan-ramDeterministic-v4)
- EnvSpec(Pooyan-ramNoFrameskip-v0)
- EnvSpec(Pooyan-ramNoFrameskip-v4)
- EnvSpec(PrivateEye-v0)
- EnvSpec(PrivateEye-v4)
- EnvSpec(PrivateEyeDeterministic-v0)
- EnvSpec(PrivateEyeDeterministic-v4)
- EnvSpec(PrivateEyeNoFrameskip-v0)
- EnvSpec(PrivateEyeNoFrameskip-v4)
- EnvSpec(PrivateEye-ram-v0)
- EnvSpec(PrivateEye-ram-v4)
- EnvSpec(PrivateEye-ramDeterministic-v0)
- EnvSpec(PrivateEye-ramDeterministic-v4)
- EnvSpec(PrivateEye-ramNoFrameskip-v0)
- EnvSpec(PrivateEye-ramNoFrameskip-v4)
- EnvSpec(Qbert-v0)
- EnvSpec(Qbert-v4)
- EnvSpec(QbertDeterministic-v0)
- EnvSpec(QbertDeterministic-v4)
- EnvSpec(QbertNoFrameskip-v0)
- EnvSpec(QbertNoFrameskip-v4)
- EnvSpec(Qbert-ram-v0)
- EnvSpec(Qbert-ram-v4)
- EnvSpec(Qbert-ramDeterministic-v0)
- EnvSpec(Qbert-ramDeterministic-v4)
- EnvSpec(Qbert-ramNoFrameskip-v0)
- EnvSpec(Qbert-ramNoFrameskip-v4)
- EnvSpec(Riverraid-v0)
- EnvSpec(Riverraid-v4)
- EnvSpec(RiverraidDeterministic-v0)
- EnvSpec(RiverraidDeterministic-v4)
- EnvSpec(RiverraidNoFrameskip-v0)
- EnvSpec(RiverraidNoFrameskip-v4)
- EnvSpec(Riverraid-ram-v0)
- EnvSpec(Riverraid-ram-v4)
- EnvSpec(Riverraid-ramDeterministic-v0)
- EnvSpec(Riverraid-ramDeterministic-v4)
- EnvSpec(Riverraid-ramNoFrameskip-v0)
- EnvSpec(Riverraid-ramNoFrameskip-v4)
- EnvSpec(RoadRunner-v0)
- EnvSpec(RoadRunner-v4)
- EnvSpec(RoadRunnerDeterministic-v0)
- EnvSpec(RoadRunnerDeterministic-v4)
- EnvSpec(RoadRunnerNoFrameskip-v0)
- EnvSpec(RoadRunnerNoFrameskip-v4)
- EnvSpec(RoadRunner-ram-v0)
- EnvSpec(RoadRunner-ram-v4)
- EnvSpec(RoadRunner-ramDeterministic-v0)
- EnvSpec(RoadRunner-ramDeterministic-v4)
- EnvSpec(RoadRunner-ramNoFrameskip-v0)
- EnvSpec(RoadRunner-ramNoFrameskip-v4)
- EnvSpec(Robotank-v0)
- EnvSpec(Robotank-v4)
- EnvSpec(RobotankDeterministic-v0)
- EnvSpec(RobotankDeterministic-v4)
- EnvSpec(RobotankNoFrameskip-v0)
- EnvSpec(RobotankNoFrameskip-v4)
- EnvSpec(Robotank-ram-v0)
- EnvSpec(Robotank-ram-v4)
- EnvSpec(Robotank-ramDeterministic-v0)
- EnvSpec(Robotank-ramDeterministic-v4)
- EnvSpec(Robotank-ramNoFrameskip-v0)
- EnvSpec(Robotank-ramNoFrameskip-v4)
- EnvSpec(Seaquest-v0)
- EnvSpec(Seaquest-v4)
- EnvSpec(SeaquestDeterministic-v0)
- EnvSpec(SeaquestDeterministic-v4)
- EnvSpec(SeaquestNoFrameskip-v0)
- EnvSpec(SeaquestNoFrameskip-v4)
- EnvSpec(Seaquest-ram-v0)
- EnvSpec(Seaquest-ram-v4)
- EnvSpec(Seaquest-ramDeterministic-v0)
- EnvSpec(Seaquest-ramDeterministic-v4)
- EnvSpec(Seaquest-ramNoFrameskip-v0)
- EnvSpec(Seaquest-ramNoFrameskip-v4)
- EnvSpec(Skiing-v0)
- EnvSpec(Skiing-v4)
- EnvSpec(SkiingDeterministic-v0)
- EnvSpec(SkiingDeterministic-v4)
- EnvSpec(SkiingNoFrameskip-v0)
- EnvSpec(SkiingNoFrameskip-v4)
- EnvSpec(Skiing-ram-v0)
- EnvSpec(Skiing-ram-v4)
- EnvSpec(Skiing-ramDeterministic-v0)
- EnvSpec(Skiing-ramDeterministic-v4)
- EnvSpec(Skiing-ramNoFrameskip-v0)
- EnvSpec(Skiing-ramNoFrameskip-v4)
- EnvSpec(Solaris-v0)
- EnvSpec(Solaris-v4)
- EnvSpec(SolarisDeterministic-v0)
- EnvSpec(SolarisDeterministic-v4)
- EnvSpec(SolarisNoFrameskip-v0)
- EnvSpec(SolarisNoFrameskip-v4)
- EnvSpec(Solaris-ram-v0)
- EnvSpec(Solaris-ram-v4)
- EnvSpec(Solaris-ramDeterministic-v0)
- EnvSpec(Solaris-ramDeterministic-v4)
- EnvSpec(Solaris-ramNoFrameskip-v0)
- EnvSpec(Solaris-ramNoFrameskip-v4)
- EnvSpec(SpaceInvaders-v0)
- EnvSpec(SpaceInvaders-v4)
- EnvSpec(SpaceInvadersDeterministic-v0)
- EnvSpec(SpaceInvadersDeterministic-v4)
- EnvSpec(SpaceInvadersNoFrameskip-v0)
- EnvSpec(SpaceInvadersNoFrameskip-v4)
- EnvSpec(SpaceInvaders-ram-v0)
- EnvSpec(SpaceInvaders-ram-v4)
- EnvSpec(SpaceInvaders-ramDeterministic-v0)
- EnvSpec(SpaceInvaders-ramDeterministic-v4)
- EnvSpec(SpaceInvaders-ramNoFrameskip-v0)
- EnvSpec(SpaceInvaders-ramNoFrameskip-v4)
- EnvSpec(StarGunner-v0)
- EnvSpec(StarGunner-v4)
- EnvSpec(StarGunnerDeterministic-v0)
- EnvSpec(StarGunnerDeterministic-v4)
- EnvSpec(StarGunnerNoFrameskip-v0)
- EnvSpec(StarGunnerNoFrameskip-v4)
- EnvSpec(StarGunner-ram-v0)
- EnvSpec(StarGunner-ram-v4)
- EnvSpec(StarGunner-ramDeterministic-v0)
- EnvSpec(StarGunner-ramDeterministic-v4)
- EnvSpec(StarGunner-ramNoFrameskip-v0)
- EnvSpec(StarGunner-ramNoFrameskip-v4)
- EnvSpec(Tennis-v0)
- EnvSpec(Tennis-v4)
- EnvSpec(TennisDeterministic-v0)
- EnvSpec(TennisDeterministic-v4)
- EnvSpec(TennisNoFrameskip-v0)
- EnvSpec(TennisNoFrameskip-v4)
- EnvSpec(Tennis-ram-v0)
- EnvSpec(Tennis-ram-v4)
- EnvSpec(Tennis-ramDeterministic-v0)
- EnvSpec(Tennis-ramDeterministic-v4)
- EnvSpec(Tennis-ramNoFrameskip-v0)
- EnvSpec(Tennis-ramNoFrameskip-v4)
- EnvSpec(TimePilot-v0)
- EnvSpec(TimePilot-v4)
- EnvSpec(TimePilotDeterministic-v0)
- EnvSpec(TimePilotDeterministic-v4)
- EnvSpec(TimePilotNoFrameskip-v0)
- EnvSpec(TimePilotNoFrameskip-v4)
- EnvSpec(TimePilot-ram-v0)
- EnvSpec(TimePilot-ram-v4)
- EnvSpec(TimePilot-ramDeterministic-v0)
- EnvSpec(TimePilot-ramDeterministic-v4)
- EnvSpec(TimePilot-ramNoFrameskip-v0)
- EnvSpec(TimePilot-ramNoFrameskip-v4)
- EnvSpec(Tutankham-v0)
- EnvSpec(Tutankham-v4)
- EnvSpec(TutankhamDeterministic-v0)
- EnvSpec(TutankhamDeterministic-v4)
- EnvSpec(TutankhamNoFrameskip-v0)
- EnvSpec(TutankhamNoFrameskip-v4)
- EnvSpec(Tutankham-ram-v0)
- EnvSpec(Tutankham-ram-v4)
- EnvSpec(Tutankham-ramDeterministic-v0)
- EnvSpec(Tutankham-ramDeterministic-v4)
- EnvSpec(Tutankham-ramNoFrameskip-v0)
- EnvSpec(Tutankham-ramNoFrameskip-v4)
- EnvSpec(UpNDown-v0)
- EnvSpec(UpNDown-v4)
- EnvSpec(UpNDownDeterministic-v0)
- EnvSpec(UpNDownDeterministic-v4)
- EnvSpec(UpNDownNoFrameskip-v0)
- EnvSpec(UpNDownNoFrameskip-v4)
- EnvSpec(UpNDown-ram-v0)
- EnvSpec(UpNDown-ram-v4)
- EnvSpec(UpNDown-ramDeterministic-v0)
- EnvSpec(UpNDown-ramDeterministic-v4)
- EnvSpec(UpNDown-ramNoFrameskip-v0)
- EnvSpec(UpNDown-ramNoFrameskip-v4)
- EnvSpec(Venture-v0)
- EnvSpec(Venture-v4)
- EnvSpec(VentureDeterministic-v0)
- EnvSpec(VentureDeterministic-v4)
- EnvSpec(VentureNoFrameskip-v0)
- EnvSpec(VentureNoFrameskip-v4)
- EnvSpec(Venture-ram-v0)
- EnvSpec(Venture-ram-v4)
- EnvSpec(Venture-ramDeterministic-v0)
- EnvSpec(Venture-ramDeterministic-v4)
- EnvSpec(Venture-ramNoFrameskip-v0)
- EnvSpec(Venture-ramNoFrameskip-v4)
- EnvSpec(VideoPinball-v0)
- EnvSpec(VideoPinball-v4)
- EnvSpec(VideoPinballDeterministic-v0)
- EnvSpec(VideoPinballDeterministic-v4)
- EnvSpec(VideoPinballNoFrameskip-v0)
- EnvSpec(VideoPinballNoFrameskip-v4)
- EnvSpec(VideoPinball-ram-v0)
- EnvSpec(VideoPinball-ram-v4)
- EnvSpec(VideoPinball-ramDeterministic-v0)
- EnvSpec(VideoPinball-ramDeterministic-v4)
- EnvSpec(VideoPinball-ramNoFrameskip-v0)
- EnvSpec(VideoPinball-ramNoFrameskip-v4)
- EnvSpec(WizardOfWor-v0)
- EnvSpec(WizardOfWor-v4)
- EnvSpec(WizardOfWorDeterministic-v0)
- EnvSpec(WizardOfWorDeterministic-v4)
- EnvSpec(WizardOfWorNoFrameskip-v0)
- EnvSpec(WizardOfWorNoFrameskip-v4)
- EnvSpec(WizardOfWor-ram-v0)
- EnvSpec(WizardOfWor-ram-v4)
- EnvSpec(WizardOfWor-ramDeterministic-v0)
- EnvSpec(WizardOfWor-ramDeterministic-v4)
- EnvSpec(WizardOfWor-ramNoFrameskip-v0)
- EnvSpec(WizardOfWor-ramNoFrameskip-v4)
- EnvSpec(YarsRevenge-v0)
- EnvSpec(YarsRevenge-v4)
- EnvSpec(YarsRevengeDeterministic-v0)
- EnvSpec(YarsRevengeDeterministic-v4)
- EnvSpec(YarsRevengeNoFrameskip-v0)
- EnvSpec(YarsRevengeNoFrameskip-v4)
- EnvSpec(YarsRevenge-ram-v0)
- EnvSpec(YarsRevenge-ram-v4)
- EnvSpec(YarsRevenge-ramDeterministic-v0)
- EnvSpec(YarsRevenge-ramDeterministic-v4)
- EnvSpec(YarsRevenge-ramNoFrameskip-v0)
- EnvSpec(YarsRevenge-ramNoFrameskip-v4)
- EnvSpec(Zaxxon-v0)
- EnvSpec(Zaxxon-v4)
- EnvSpec(ZaxxonDeterministic-v0)
- EnvSpec(ZaxxonDeterministic-v4)
- EnvSpec(ZaxxonNoFrameskip-v0)
- EnvSpec(ZaxxonNoFrameskip-v4)
- EnvSpec(Zaxxon-ram-v0)
- EnvSpec(Zaxxon-ram-v4)
- EnvSpec(Zaxxon-ramDeterministic-v0)
- EnvSpec(Zaxxon-ramDeterministic-v4)
- EnvSpec(Zaxxon-ramNoFrameskip-v0)
- EnvSpec(Zaxxon-ramNoFrameskip-v4)
- EnvSpec(CubeCrash-v0)
- EnvSpec(CubeCrashSparse-v0)
- EnvSpec(CubeCrashScreenBecomesBlack-v0)
- EnvSpec(MemorizeDigits-v0)])
+| RepeatCopy-v0                                         | Enduro-ram-v0                        | BankHeistNoFrameskip-v4            | Pong-v4                           |
+| ----------------------------------------------------- | ------------------------------------ | ---------------------------------- | :-------------------------------- |
+| ReversedAddition-v0                                   | Enduro-ram-v4                        | BankHeist-ram-v0                   | PongDeterministic-v0              |
+| ReversedAddition3-v0                                  | Enduro-ramDeterministic-v0           | BankHeist-ram-v4                   | PongDeterministic-v4              |
+| DuplicatedInput-v0                                    | Enduro-ramDeterministic-v4           | BankHeist-ramDeterministic-v0      | PongNoFrameskip-v0                |
+| Reverse-v0                                            | Enduro-ramNoFrameskip-v0             | BankHeist-ramDeterministic-v4      | PongNoFrameskip-v4                |
+| CartPole-v0                                           | Enduro-ramNoFrameskip-v4             | BankHeist-ramNoFrameskip-v0        | Pong-ram-v0                       |
+| CartPole-v1                                           | FishingDerby-v0                      | BankHeist-ramNoFrameskip-v4        | Pong-ram-v4                       |
+| MountainCar-v0                                        | FishingDerby-v4                      | BattleZone-v0                      | Pong-ramDeterministic-v0          |
+| MountainCarContinuous-v0                              | FishingDerbyDeterministic-v0         | BattleZone-v4                      | Pong-ramDeterministic-v4          |
+| Pendulum-v0                                           | FishingDerbyDeterministic-v4         | BattleZoneDeterministic-v0         | Pong-ramNoFrameskip-v0            |
+| Acrobot-v1                                            | FishingDerbyNoFrameskip-v0           | BattleZoneDeterministic-v4         | Pong-ramNoFrameskip-v4            |
+| LunarLander-v2                                        | FishingDerbyNoFrameskip-v4           | BattleZoneNoFrameskip-v0           | Pooyan-v0                         |
+| LunarLanderContinuous-v2                              | FishingDerby-ram-v0                  | BattleZoneNoFrameskip-v4           | Pooyan-v4                         |
+| BipedalWalker-v3                                      | FishingDerby-ram-v4                  | BattleZone-ram-v0                  | PooyanDeterministic-v0            |
+| BipedalWalkerHardcore-v3                              | FishingDerby-ramDeterministic-v0     | BattleZone-ram-v4                  | PooyanDeterministic-v4            |
+| CarRacing-v0                                          | FishingDerby-ramDeterministic-v4     | BattleZone-ramDeterministic-v0     | PooyanNoFrameskip-v0              |
+| Blackjack-v0                                          | FishingDerby-ramNoFrameskip-v0       | BattleZone-ramDeterministic-v4     | PooyanNoFrameskip-v4              |
+| KellyCoinflip-v0                                      | FishingDerby-ramNoFrameskip-v4       | BattleZone-ramNoFrameskip-v0       | Pooyan-ram-v0                     |
+| KellyCoinflipGeneralized-v0                           | Freeway-v0                           | BattleZone-ramNoFrameskip-v4       | Pooyan-ram-v4                     |
+| FrozenLake-v0                                         | Freeway-v4                           | BeamRider-v0                       | Pooyan-ramDeterministic-v0        |
+| FrozenLake8x8-v0                                      | FreewayDeterministic-v0              | BeamRider-v4                       | Pooyan-ramDeterministic-v4        |
+| CliffWalking-v0                                       | FreewayDeterministic-v4              | BeamRiderDeterministic-v0          | Pooyan-ramNoFrameskip-v0          |
+| NChain-v0                                             | FreewayNoFrameskip-v0                | BeamRiderDeterministic-v4          | Pooyan-ramNoFrameskip-v4          |
+| Roulette-v0                                           | FreewayNoFrameskip-v4                | BeamRiderNoFrameskip-v0            | PrivateEye-v0                     |
+| Taxi-v3                                               | Freeway-ram-v0                       | BeamRiderNoFrameskip-v4            | PrivateEye-v4                     |
+| GuessingGame-v0                                       | Freeway-ram-v4                       | BeamRider-ram-v0                   | PrivateEyeDeterministic-v0        |
+| HotterColder-v0                                       | Freeway-ramDeterministic-v0          | BeamRider-ram-v4                   | PrivateEyeDeterministic-v4        |
+| Reacher-v2                                            | Freeway-ramDeterministic-v4          | BeamRider-ramDeterministic-v0      | PrivateEyeNoFrameskip-v0          |
+| Pusher-v2                                             | Freeway-ramNoFrameskip-v0            | BeamRider-ramDeterministic-v4      | PrivateEyeNoFrameskip-v4          |
+| Thrower-v2                                            | Freeway-ramNoFrameskip-v4            | BeamRider-ramNoFrameskip-v0        | PrivateEye-ram-v0                 |
+| Striker-v2                                            | Frostbite-v0                         | BeamRider-ramNoFrameskip-v4        | PrivateEye-ram-v4                 |
+| InvertedPendulum-v2                                   | Frostbite-v4                         | Berzerk-v0                         | PrivateEye-ramDeterministic-v0    |
+| InvertedDoublePendulum-v2                             | FrostbiteDeterministic-v0            | Berzerk-v4                         | PrivateEye-ramDeterministic-v4    |
+| HalfCheetah-v2                                        | FrostbiteDeterministic-v4            | BerzerkDeterministic-v0            | PrivateEye-ramNoFrameskip-v0      |
+| HalfCheetah-v3                                        | FrostbiteNoFrameskip-v0              | BerzerkDeterministic-v4            | PrivateEye-ramNoFrameskip-v4      |
+| Hopper-v2                                             | FrostbiteNoFrameskip-v4              | BerzerkNoFrameskip-v0              | Qbert-v0                          |
+| Hopper-v3                                             | Frostbite-ram-v0                     | BerzerkNoFrameskip-v4              | Qbert-v4                          |
+| Swimmer-v2                                            | Frostbite-ram-v4                     | Berzerk-ram-v0                     | QbertDeterministic-v0             |
+| Swimmer-v3                                            | Frostbite-ramDeterministic-v0        | Berzerk-ram-v4                     | QbertDeterministic-v4             |
+| Walker2d-v2                                           | Frostbite-ramDeterministic-v4        | Berzerk-ramDeterministic-v0        | QbertNoFrameskip-v0               |
+| Walker2d-v3                                           | Frostbite-ramNoFrameskip-v0          | Berzerk-ramDeterministic-v4        | QbertNoFrameskip-v4               |
+| Ant-v2                                                | Frostbite-ramNoFrameskip-v4          | Berzerk-ramNoFrameskip-v0          | Qbert-ram-v0                      |
+| Ant-v3                                                | Gopher-v0                            | Berzerk-ramNoFrameskip-v4          | Qbert-ram-v4                      |
+| Humanoid-v2                                           | Gopher-v4                            | Bowling-v0                         | Qbert-ramDeterministic-v0         |
+| Humanoid-v3                                           | GopherDeterministic-v0               | Bowling-v4                         | Qbert-ramDeterministic-v4         |
+| HumanoidStandup-v2                                    | GopherDeterministic-v4               | BowlingDeterministic-v0            | Qbert-ramNoFrameskip-v0           |
+| FetchSlide-v1                                         | GopherNoFrameskip-v0                 | BowlingDeterministic-v4            | Qbert-ramNoFrameskip-v4           |
+| FetchPickAndPlace-v1                                  | GopherNoFrameskip-v4                 | BowlingNoFrameskip-v0              | Riverraid-v0                      |
+| FetchReach-v1                                         | Gopher-ram-v0                        | BowlingNoFrameskip-v4              | Riverraid-v4                      |
+| FetchPush-v1                                          | Gopher-ram-v4                        | Bowling-ram-v0                     | RiverraidDeterministic-v0         |
+| HandReach-v0                                          | Gopher-ramDeterministic-v0           | Bowling-ram-v4                     | RiverraidDeterministic-v4         |
+| HandManipulateBlockRotateZ-v0                         | Gopher-ramDeterministic-v4           | Bowling-ramDeterministic-v0        | RiverraidNoFrameskip-v0           |
+| HandManipulateBlockRotateZTouchSensors-v0             | Gopher-ramNoFrameskip-v0             | Bowling-ramDeterministic-v4        | RiverraidNoFrameskip-v4           |
+| HandManipulateBlockRotateZTouchSensors-v1             | Gopher-ramNoFrameskip-v4             | Bowling-ramNoFrameskip-v0          | Riverraid-ram-v0                  |
+| HandManipulateBlockRotateParallel-v0                  | Gravitar-v0                          | Bowling-ramNoFrameskip-v4          | Riverraid-ram-v4                  |
+| HandManipulateBlockRotateParallelTouchSensors-v0      | Gravitar-v4                          | Boxing-v0                          | Riverraid-ramDeterministic-v0     |
+| HandManipulateBlockRotateParallelTouchSensors-v1      | GravitarDeterministic-v0             | Boxing-v4                          | Riverraid-ramDeterministic-v4     |
+| HandManipulateBlockRotateXYZ-v0                       | GravitarDeterministic-v4             | BoxingDeterministic-v0             | Riverraid-ramNoFrameskip-v0       |
+| HandManipulateBlockRotateXYZTouchSensors-v0           | GravitarNoFrameskip-v0               | BoxingDeterministic-v4             | Riverraid-ramNoFrameskip-v4       |
+| HandManipulateBlockRotateXYZTouchSensors-v1           | GravitarNoFrameskip-v4               | BoxingNoFrameskip-v0               | RoadRunner-v0                     |
+| HandManipulateBlockFull-v0                            | Gravitar-ram-v0                      | BoxingNoFrameskip-v4               | RoadRunner-v4                     |
+| HandManipulateBlock-v0                                | Gravitar-ram-v4                      | Boxing-ram-v0                      | RoadRunnerDeterministic-v0        |
+| HandManipulateBlockTouchSensors-v0                    | Gravitar-ramDeterministic-v0         | Boxing-ram-v4                      | RoadRunnerDeterministic-v4        |
+| HandManipulateBlockTouchSensors-v1                    | Gravitar-ramDeterministic-v4         | Boxing-ramDeterministic-v0         | RoadRunnerNoFrameskip-v0          |
+| HandManipulateEggRotate-v0                            | Gravitar-ramNoFrameskip-v0           | Boxing-ramDeterministic-v4         | RoadRunnerNoFrameskip-v4          |
+| HandManipulateEggRotateTouchSensors-v0                | Gravitar-ramNoFrameskip-v4           | Boxing-ramNoFrameskip-v0           | RoadRunner-ram-v0                 |
+| HandManipulateEggRotateTouchSensors-v1                | Hero-v0                              | Boxing-ramNoFrameskip-v4           | RoadRunner-ram-v4                 |
+| HandManipulateEggFull-v0                              | Hero-v4                              | Breakout-v0                        | RoadRunner-ramDeterministic-v0    |
+| HandManipulateEgg-v0                                  | HeroDeterministic-v0                 | Breakout-v4                        | RoadRunner-ramDeterministic-v4    |
+| HandManipulateEggTouchSensors-v0                      | HeroDeterministic-v4                 | BreakoutDeterministic-v0           | RoadRunner-ramNoFrameskip-v0      |
+| HandManipulateEggTouchSensors-v1                      | HeroNoFrameskip-v0                   | BreakoutDeterministic-v4           | RoadRunner-ramNoFrameskip-v4      |
+| HandManipulatePenRotate-v0                            | HeroNoFrameskip-v4                   | BreakoutNoFrameskip-v0             | Robotank-v0                       |
+| HandManipulatePenRotateTouchSensors-v0                | Hero-ram-v0                          | BreakoutNoFrameskip-v4             | Robotank-v4                       |
+| HandManipulatePenRotateTouchSensors-v1                | Hero-ram-v4                          | Breakout-ram-v0                    | RobotankDeterministic-v0          |
+| HandManipulatePenFull-v0                              | Hero-ramDeterministic-v0             | Breakout-ram-v4                    | RobotankDeterministic-v4          |
+| HandManipulatePen-v0                                  | Hero-ramDeterministic-v4             | Breakout-ramDeterministic-v0       | RobotankNoFrameskip-v0            |
+| HandManipulatePenTouchSensors-v0                      | Hero-ramNoFrameskip-v0               | Breakout-ramDeterministic-v4       | RobotankNoFrameskip-v4            |
+| HandManipulatePenTouchSensors-v1                      | Hero-ramNoFrameskip-v4               | Breakout-ramNoFrameskip-v0         | Robotank-ram-v0                   |
+| FetchSlideDense-v1                                    | IceHockey-v0                         | Breakout-ramNoFrameskip-v4         | Robotank-ram-v4                   |
+| FetchPickAndPlaceDense-v1                             | IceHockey-v4                         | Carnival-v0                        | Robotank-ramDeterministic-v0      |
+| FetchReachDense-v1                                    | IceHockeyDeterministic-v0            | Carnival-v4                        | Robotank-ramDeterministic-v4      |
+| FetchPushDense-v1                                     | IceHockeyDeterministic-v4            | CarnivalDeterministic-v0           | Robotank-ramNoFrameskip-v0        |
+| HandReachDense-v0                                     | IceHockeyNoFrameskip-v0              | CarnivalDeterministic-v4           | Robotank-ramNoFrameskip-v4        |
+| HandManipulateBlockRotateZDense-v0                    | IceHockeyNoFrameskip-v4              | CarnivalNoFrameskip-v0             | Seaquest-v0                       |
+| HandManipulateBlockRotateZTouchSensorsDense-v0        | IceHockey-ram-v0                     | CarnivalNoFrameskip-v4             | Seaquest-v4                       |
+| HandManipulateBlockRotateZTouchSensorsDense-v1        | IceHockey-ram-v4                     | Carnival-ram-v0                    | SeaquestDeterministic-v0          |
+| HandManipulateBlockRotateParallelDense-v0             | IceHockey-ramDeterministic-v0        | Carnival-ram-v4                    | SeaquestDeterministic-v4          |
+| HandManipulateBlockRotateParallelTouchSensorsDense-v0 | IceHockey-ramDeterministic-v4        | Carnival-ramDeterministic-v0       | SeaquestNoFrameskip-v0            |
+| HandManipulateBlockRotateParallelTouchSensorsDense-v1 | IceHockey-ramNoFrameskip-v0          | Carnival-ramDeterministic-v4       | SeaquestNoFrameskip-v4            |
+| HandManipulateBlockRotateXYZDense-v0                  | IceHockey-ramNoFrameskip-v4          | Carnival-ramNoFrameskip-v0         | Seaquest-ram-v0                   |
+| HandManipulateBlockRotateXYZTouchSensorsDense-v0      | Jamesbond-v0                         | Carnival-ramNoFrameskip-v4         | Seaquest-ram-v4                   |
+| HandManipulateBlockRotateXYZTouchSensorsDense-v1      | Jamesbond-v4                         | Centipede-v0                       | Seaquest-ramDeterministic-v0      |
+| HandManipulateBlockFullDense-v0                       | JamesbondDeterministic-v0            | Centipede-v4                       | Seaquest-ramDeterministic-v4      |
+| HandManipulateBlockDense-v0                           | JamesbondDeterministic-v4            | CentipedeDeterministic-v0          | Seaquest-ramNoFrameskip-v0        |
+| HandManipulateBlockTouchSensorsDense-v0               | JamesbondNoFrameskip-v0              | CentipedeDeterministic-v4          | Seaquest-ramNoFrameskip-v4        |
+| HandManipulateBlockTouchSensorsDense-v1               | JamesbondNoFrameskip-v4              | CentipedeNoFrameskip-v0            | Skiing-v0                         |
+| HandManipulateEggRotateDense-v0                       | Jamesbond-ram-v0                     | CentipedeNoFrameskip-v4            | Skiing-v4                         |
+| HandManipulateEggRotateTouchSensorsDense-v0           | Jamesbond-ram-v4                     | Centipede-ram-v0                   | SkiingDeterministic-v0            |
+| HandManipulateEggRotateTouchSensorsDense-v1           | Jamesbond-ramDeterministic-v0        | Centipede-ram-v4                   | SkiingDeterministic-v4            |
+| HandManipulateEggFullDense-v0                         | Jamesbond-ramDeterministic-v4        | Centipede-ramDeterministic-v0      | SkiingNoFrameskip-v0              |
+| HandManipulateEggDense-v0                             | Jamesbond-ramNoFrameskip-v0          | Centipede-ramDeterministic-v4      | SkiingNoFrameskip-v4              |
+| HandManipulateEggTouchSensorsDense-v0                 | Jamesbond-ramNoFrameskip-v4          | Centipede-ramNoFrameskip-v0        | Skiing-ram-v0                     |
+| HandManipulateEggTouchSensorsDense-v1                 | JourneyEscape-v0                     | Centipede-ramNoFrameskip-v4        | Skiing-ram-v4                     |
+| HandManipulatePenRotateDense-v0                       | JourneyEscape-v4                     | ChopperCommand-v0                  | Skiing-ramDeterministic-v0        |
+| HandManipulatePenRotateTouchSensorsDense-v0           | JourneyEscapeDeterministic-v0        | ChopperCommand-v4                  | Skiing-ramDeterministic-v4        |
+| HandManipulatePenRotateTouchSensorsDense-v1           | JourneyEscapeDeterministic-v4        | ChopperCommandDeterministic-v0     | Skiing-ramNoFrameskip-v0          |
+| HandManipulatePenFullDense-v0                         | JourneyEscapeNoFrameskip-v0          | ChopperCommandDeterministic-v4     | Skiing-ramNoFrameskip-v4          |
+| HandManipulatePenDense-v0                             | JourneyEscapeNoFrameskip-v4          | ChopperCommandNoFrameskip-v0       | Solaris-v0                        |
+| HandManipulatePenTouchSensorsDense-v0                 | JourneyEscape-ram-v0                 | ChopperCommandNoFrameskip-v4       | Solaris-v4                        |
+| HandManipulatePenTouchSensorsDense-v1                 | JourneyEscape-ram-v4                 | ChopperCommand-ram-v0              | SolarisDeterministic-v0           |
+| Adventure-v0                                          | JourneyEscape-ramDeterministic-v0    | ChopperCommand-ram-v4              | SolarisDeterministic-v4           |
+| Adventure-v4                                          | JourneyEscape-ramDeterministic-v4    | ChopperCommand-ramDeterministic-v0 | SolarisNoFrameskip-v0             |
+| AdventureDeterministic-v0                             | JourneyEscape-ramNoFrameskip-v0      | ChopperCommand-ramDeterministic-v4 | SolarisNoFrameskip-v4             |
+| AdventureDeterministic-v4                             | JourneyEscape-ramNoFrameskip-v4      | ChopperCommand-ramNoFrameskip-v0   | Solaris-ram-v0                    |
+| AdventureNoFrameskip-v0                               | Kangaroo-v0                          | ChopperCommand-ramNoFrameskip-v4   | Solaris-ram-v4                    |
+| AdventureNoFrameskip-v4                               | Kangaroo-v4                          | CrazyClimber-v0                    | Solaris-ramDeterministic-v0       |
+| Adventure-ram-v0                                      | KangarooDeterministic-v0             | CrazyClimber-v4                    | Solaris-ramDeterministic-v4       |
+| Adventure-ram-v4                                      | KangarooDeterministic-v4             | CrazyClimberDeterministic-v0       | Solaris-ramNoFrameskip-v0         |
+| Adventure-ramDeterministic-v0                         | KangarooNoFrameskip-v0               | CrazyClimberDeterministic-v4       | Solaris-ramNoFrameskip-v4         |
+| Adventure-ramDeterministic-v4                         | KangarooNoFrameskip-v4               | CrazyClimberNoFrameskip-v0         | SpaceInvaders-v0                  |
+| Adventure-ramNoFrameskip-v0                           | Kangaroo-ram-v0                      | CrazyClimberNoFrameskip-v4         | SpaceInvaders-v4                  |
+| Adventure-ramNoFrameskip-v4                           | Kangaroo-ram-v4                      | CrazyClimber-ram-v0                | SpaceInvadersDeterministic-v0     |
+| AirRaid-v0                                            | Kangaroo-ramDeterministic-v0         | CrazyClimber-ram-v4                | SpaceInvadersDeterministic-v4     |
+| AirRaid-v4                                            | Kangaroo-ramDeterministic-v4         | CrazyClimber-ramDeterministic-v0   | SpaceInvadersNoFrameskip-v0       |
+| AirRaidDeterministic-v0                               | Kangaroo-ramNoFrameskip-v0           | CrazyClimber-ramDeterministic-v4   | SpaceInvadersNoFrameskip-v4       |
+| AirRaidDeterministic-v4                               | Kangaroo-ramNoFrameskip-v4           | CrazyClimber-ramNoFrameskip-v0     | SpaceInvaders-ram-v0              |
+| AirRaidNoFrameskip-v0                                 | Krull-v0                             | CrazyClimber-ramNoFrameskip-v4     | SpaceInvaders-ram-v4              |
+| AirRaidNoFrameskip-v4                                 | Krull-v4                             | Defender-v0                        | SpaceInvaders-ramDeterministic-v0 |
+| AirRaid-ram-v0                                        | KrullDeterministic-v0                | Defender-v4                        | SpaceInvaders-ramDeterministic-v4 |
+| AirRaid-ram-v4                                        | KrullDeterministic-v4                | DefenderDeterministic-v0           | SpaceInvaders-ramNoFrameskip-v0   |
+| AirRaid-ramDeterministic-v0                           | KrullNoFrameskip-v0                  | DefenderDeterministic-v4           | SpaceInvaders-ramNoFrameskip-v4   |
+| AirRaid-ramDeterministic-v4                           | KrullNoFrameskip-v4                  | DefenderNoFrameskip-v0             | StarGunner-v0                     |
+| AirRaid-ramNoFrameskip-v0                             | Krull-ram-v0                         | DefenderNoFrameskip-v4             | StarGunner-v4                     |
+| AirRaid-ramNoFrameskip-v4                             | Krull-ram-v4                         | Defender-ram-v0                    | StarGunnerDeterministic-v0        |
+| Alien-v0                                              | Krull-ramDeterministic-v0            | Defender-ram-v4                    | StarGunnerDeterministic-v4        |
+| Alien-v4                                              | Krull-ramDeterministic-v4            | Defender-ramDeterministic-v0       | StarGunnerNoFrameskip-v0          |
+| AlienDeterministic-v0                                 | Krull-ramNoFrameskip-v0              | Defender-ramDeterministic-v4       | StarGunnerNoFrameskip-v4          |
+| AlienDeterministic-v4                                 | Krull-ramNoFrameskip-v4              | Defender-ramNoFrameskip-v0         | StarGunner-ram-v0                 |
+| AlienNoFrameskip-v0                                   | KungFuMaster-v0                      | Defender-ramNoFrameskip-v4         | StarGunner-ram-v4                 |
+| AlienNoFrameskip-v4                                   | KungFuMaster-v4                      | DemonAttack-v0                     | StarGunner-ramDeterministic-v0    |
+| Alien-ram-v0                                          | KungFuMasterDeterministic-v0         | DemonAttack-v4                     | StarGunner-ramDeterministic-v4    |
+| Alien-ram-v4                                          | KungFuMasterDeterministic-v4         | DemonAttackDeterministic-v0        | StarGunner-ramNoFrameskip-v0      |
+| Alien-ramDeterministic-v0                             | KungFuMasterNoFrameskip-v0           | DemonAttackDeterministic-v4        | StarGunner-ramNoFrameskip-v4      |
+| Alien-ramDeterministic-v4                             | KungFuMasterNoFrameskip-v4           | DemonAttackNoFrameskip-v0          | Tennis-v0                         |
+| Alien-ramNoFrameskip-v0                               | KungFuMaster-ram-v0                  | DemonAttackNoFrameskip-v4          | Tennis-v4                         |
+| Alien-ramNoFrameskip-v4                               | KungFuMaster-ram-v4                  | DemonAttack-ram-v0                 | TennisDeterministic-v0            |
+| Amidar-v0                                             | KungFuMaster-ramDeterministic-v0     | DemonAttack-ram-v4                 | TennisDeterministic-v4            |
+| Amidar-v4                                             | KungFuMaster-ramDeterministic-v4     | DemonAttack-ramDeterministic-v0    | TennisNoFrameskip-v0              |
+| AmidarDeterministic-v0                                | KungFuMaster-ramNoFrameskip-v0       | DemonAttack-ramDeterministic-v4    | TennisNoFrameskip-v4              |
+| AmidarDeterministic-v4                                | KungFuMaster-ramNoFrameskip-v4       | DemonAttack-ramNoFrameskip-v0      | Tennis-ram-v0                     |
+| AmidarNoFrameskip-v0                                  | MontezumaRevenge-v0                  | DemonAttack-ramNoFrameskip-v4      | Tennis-ram-v4                     |
+| AmidarNoFrameskip-v4                                  | MontezumaRevenge-v4                  | DoubleDunk-v0                      | Tennis-ramDeterministic-v0        |
+| Amidar-ram-v0                                         | MontezumaRevengeDeterministic-v0     | DoubleDunk-v4                      | Tennis-ramDeterministic-v4        |
+| Amidar-ram-v4                                         | MontezumaRevengeDeterministic-v4     | DoubleDunkDeterministic-v0         | Tennis-ramNoFrameskip-v0          |
+| Amidar-ramDeterministic-v0                            | MontezumaRevengeNoFrameskip-v0       | DoubleDunkDeterministic-v4         | Tennis-ramNoFrameskip-v4          |
+| Amidar-ramDeterministic-v4                            | MontezumaRevengeNoFrameskip-v4       | DoubleDunkNoFrameskip-v0           | TimePilot-v0                      |
+| Amidar-ramNoFrameskip-v0                              | MontezumaRevenge-ram-v0              | DoubleDunkNoFrameskip-v4           | TimePilot-v4                      |
+| Amidar-ramNoFrameskip-v4                              | MontezumaRevenge-ram-v4              | DoubleDunk-ram-v0                  | TimePilotDeterministic-v0         |
+| Assault-v0                                            | MontezumaRevenge-ramDeterministic-v0 | DoubleDunk-ram-v4                  | TimePilotDeterministic-v4         |
+| Assault-v4                                            | MontezumaRevenge-ramDeterministic-v4 | DoubleDunk-ramDeterministic-v0     | TimePilotNoFrameskip-v0           |
+| AssaultDeterministic-v0                               | MontezumaRevenge-ramNoFrameskip-v0   | DoubleDunk-ramDeterministic-v4     | TimePilotNoFrameskip-v4           |
+| AssaultDeterministic-v4                               | MontezumaRevenge-ramNoFrameskip-v4   | DoubleDunk-ramNoFrameskip-v0       | TimePilot-ram-v0                  |
+| AssaultNoFrameskip-v0                                 | MsPacman-v0                          | DoubleDunk-ramNoFrameskip-v4       | TimePilot-ram-v4                  |
+| AssaultNoFrameskip-v4                                 | MsPacman-v4                          | ElevatorAction-v0                  | TimePilot-ramDeterministic-v0     |
+| Assault-ram-v0                                        | MsPacmanDeterministic-v0             | ElevatorAction-v4                  | TimePilot-ramDeterministic-v4     |
+| Assault-ram-v4                                        | MsPacmanDeterministic-v4             | ElevatorActionDeterministic-v0     | TimePilot-ramNoFrameskip-v0       |
+| Assault-ramDeterministic-v0                           | MsPacmanNoFrameskip-v0               | ElevatorActionDeterministic-v4     | TimePilot-ramNoFrameskip-v4       |
+| Assault-ramDeterministic-v4                           | MsPacmanNoFrameskip-v4               | ElevatorActionNoFrameskip-v0       | Tutankham-v0                      |
+| Assault-ramNoFrameskip-v0                             | MsPacman-ram-v0                      | ElevatorActionNoFrameskip-v4       | Tutankham-v4                      |
+| Assault-ramNoFrameskip-v4                             | MsPacman-ram-v4                      | ElevatorAction-ram-v0              | TutankhamDeterministic-v0         |
+| Asterix-v0                                            | MsPacman-ramDeterministic-v0         | ElevatorAction-ram-v4              | TutankhamDeterministic-v4         |
+| Asterix-v4                                            | MsPacman-ramDeterministic-v4         | ElevatorAction-ramDeterministic-v0 | TutankhamNoFrameskip-v0           |
+| AsterixDeterministic-v0                               | MsPacman-ramNoFrameskip-v0           | ElevatorAction-ramDeterministic-v4 | TutankhamNoFrameskip-v4           |
+| AsterixDeterministic-v4                               | MsPacman-ramNoFrameskip-v4           | ElevatorAction-ramNoFrameskip-v0   | Tutankham-ram-v0                  |
+| AsterixNoFrameskip-v0                                 | NameThisGame-v0                      | ElevatorAction-ramNoFrameskip-v4   | Tutankham-ram-v4                  |
+| AsterixNoFrameskip-v4                                 | NameThisGame-v4                      | Enduro-v0                          | Tutankham-ramDeterministic-v0     |
+| Asterix-ram-v0                                        | NameThisGameDeterministic-v0         | Enduro-v4                          | Tutankham-ramDeterministic-v4     |
+| Asterix-ram-v4                                        | NameThisGameDeterministic-v4         | EnduroDeterministic-v0             | Tutankham-ramNoFrameskip-v0       |
+| Asterix-ramDeterministic-v0                           | NameThisGameNoFrameskip-v0           | EnduroDeterministic-v4             | Tutankham-ramNoFrameskip-v4       |
+| Asterix-ramDeterministic-v4                           | NameThisGameNoFrameskip-v4           | EnduroNoFrameskip-v0               | UpNDown-v0                        |
+| Asterix-ramNoFrameskip-v0                             | NameThisGame-ram-v0                  | EnduroNoFrameskip-v4               | UpNDown-v4                        |
+| Asterix-ramNoFrameskip-v4                             | NameThisGame-ram-v4                  | Asteroids-ramNoFrameskip-v4        | Phoenix-ram-v4                    |
+| Asteroids-v0                                          | NameThisGame-ramDeterministic-v0     | Atlantis-v0                        | Phoenix-ramDeterministic-v0       |
+| Asteroids-v4                                          | NameThisGame-ramDeterministic-v4     | Atlantis-v4                        | Phoenix-ramDeterministic-v4       |
+| AsteroidsDeterministic-v0                             | NameThisGame-ramNoFrameskip-v0       | AtlantisDeterministic-v0           | Phoenix-ramNoFrameskip-v0         |
+| AsteroidsDeterministic-v4                             | NameThisGame-ramNoFrameskip-v4       | AtlantisDeterministic-v4           | Phoenix-ramNoFrameskip-v4         |
+| AsteroidsNoFrameskip-v0                               | Phoenix-v0                           | AtlantisNoFrameskip-v0             | Pitfall-v0                        |
+| AsteroidsNoFrameskip-v4                               | Phoenix-v4                           | AtlantisNoFrameskip-v4             | Pitfall-v4                        |
+| Asteroids-ram-v0                                      | PhoenixDeterministic-v0              | Atlantis-ram-v0                    | PitfallDeterministic-v0           |
+| Asteroids-ram-v4                                      | PhoenixDeterministic-v4              | Atlantis-ram-v4                    | PitfallDeterministic-v4           |
+| Asteroids-ramDeterministic-v0                         | PhoenixNoFrameskip-v0                | Atlantis-ramDeterministic-v0       | PitfallNoFrameskip-v0             |
+| Asteroids-ramDeterministic-v4                         | PhoenixNoFrameskip-v4                | Atlantis-ramDeterministic-v4       | PitfallNoFrameskip-v4             |
+| Asteroids-ramNoFrameskip-v0                           | Phoenix-ram-v0                       | Atlantis-ramNoFrameskip-v0         | Pitfall-ram-v0                    |
+| BankHeistDeterministic-v4                             | Pitfall-ramNoFrameskip-v4            | Atlantis-ramNoFrameskip-v4         | Pitfall-ram-v4                    |
+| BankHeistNoFrameskip-v0                               | Pong-v0                              | BankHeist-v0                       | Pitfall-ramDeterministic-v0       |
+| BankHeistDeterministic-v0                             | Pitfall-ramNoFrameskip-v0            | BankHeist-v4                       | Pitfall-ramDeterministic-v4       |
+
