@@ -325,3 +325,38 @@ array([[0., 0., 1., 0.],
 
 在迭代过程中完全按照公式$V(s) \leftarrow \sum_a\pi(a|s)\sum_{s',r}p(s',r|s,a)[r+\gamma V(s')]$进行。
 
+***
+
+#### 历史文章链接：
+
+* [强化学习基础篇（十一）迷宫环境搭建](https://mp.weixin.qq.com/s/pZX-3NZsMbbDKIxTSbltMg)
+* [强化学习基础篇（十）OpenAI Gym环境汇总](https://mp.weixin.qq.com/s/mDBnKIrkPJsUB4rgFhjgNw)
+* [强化学习基础篇（九）OpenAI Gym基础介绍](https://mp.weixin.qq.com/s/dH_6p-MVZRnfElABo53mxA)
+* [强化学习基础篇（八）动态规划扩展](https://mp.weixin.qq.com/s/YLcqUdh3Ll-xpxVWIQaTEw)
+* [强化学习基础篇（七）动态规划之价值迭代](https://mp.weixin.qq.com/s/hl_DhYReSm4sFTTeoU12yQ)
+* [强化学习基础篇（六）动态规划之策略迭代（2）](https://mp.weixin.qq.com/s/KidfCZdkwNor5VVW0IWpqg)
+* [强化学习基础篇（五）动态规划之策略迭代（1）](https://mp.weixin.qq.com/s/JcMoNeK-8a79e5LrQUUWNw)
+* [强化学习基础篇（四）动态规划之迭代策略评估](https://mp.weixin.qq.com/s/8neEdbOK5P6LhYkDQQ3n5w)
+* [强化学习基础篇（三）动态规划之基础介绍](https://mp.weixin.qq.com/s/y7hUY5z3XtMUpGM9fLKY9A)
+* [强化学习基础篇（二）马尔科夫决策过程（MDP）](https://mp.weixin.qq.com/s/uqW6_w-d6HpuOHU9lAhFZw)
+* [强化学习基础篇（一）强化学习入门](https://mp.weixin.qq.com/s/HjtWypce314lv_NaX3g7Dg)
+* [9.进一步讨论Policy Gradients方法](https://mp.weixin.qq.com/s/DZGETkoQbMuf9vdLPj00Ug)
+* [8. DRL中的Q-Function](https://mp.weixin.qq.com/s/7Xeube5a39pDiVRYtBtcKw)
+* [7. 值函数方法（Value Function Methods）](https://mp.weixin.qq.com/s/zJhi46uDrc1uhbbnFETP0Q)
+* [6. Actor-Critic算法](https://mp.weixin.qq.com/s/cX-TfxyuSrua7htKb74I_A)
+* [5. 策略梯度（Policy Gradients）](https://mp.weixin.qq.com/s/Q3LbRneXLCUpJWtTlkQeSw)
+* [4.强化学习简介](https://mp.weixin.qq.com/s/GFskOiE2ixkC3g3s9-YcVw)
+* [3.TensorFlow示例](https://mp.weixin.qq.com/s/nvcr-JSwdXiCRKM9ScR-lw)
+* [2.模仿学习（Imitation Learning）](https://mp.weixin.qq.com/s/GqItmD3VUvTixo9AQQcdng)
+* [1.深度强化学习简介](https://mp.weixin.qq.com/s/K0vlY_ny_CFtluSksug9Ug)
+* [A survey on value-based deep reinforcement learning](https://mp.weixin.qq.com/s/vPUQPSWU3I5LTZGf1RnavA)
+* [Chinese Stock Prediction Using Deep Neural Network](https://mp.weixin.qq.com/s/sJJjl00Xq85tQxGF3QRd7A)
+* [Differential Dynamics of the Maternal Immune System阅读笔记](https://mp.weixin.qq.com/s/FHhboX2bKZkFBoRhU-bfCQ)
+* [bib如何生成author-year格式的bbl的问题](https://mp.weixin.qq.com/s/AVyiui8MrTLTzqsIAnjw7g)
+* [如何使用GPU运行TensorFlow（Win10）](https://mp.weixin.qq.com/s/VEcz_8IJIZmWwiTp2Tv8Rw)
+* [通过frp实现内网穿透](https://mp.weixin.qq.com/s/jAKT96rL99slMTBJcIOsGQ)
+* [关于t-SNE降维方法](https://mp.weixin.qq.com/s/3XiJawom2HhyNqNcUz-GuQ)
+* [系统评价与Meta分析基础](https://mp.weixin.qq.com/s/EocI10Sx6PFdAz6nJ5QGow)
+* [Meta分析入门工具介绍](https://mp.weixin.qq.com/s/w7p7Vu1tPRhyrfpThIPRXA)
+* [使用ruptures检测变量关系](https://mp.weixin.qq.com/s/vG3JmOxboH_LUX1yamYNoA)
+* [如何读取rda格式数据](https://mp.weixin.qq.com/s/RIffIjmdcd2zpZqfyiahLQ)
